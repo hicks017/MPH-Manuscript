@@ -1,0 +1,629 @@
+---
+title: "Exploratory Statistics"
+author: "Christian Hicks"
+date: "Last compiled on `r format(Sys.time(), '%d %B %Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+pacman::p_load('knitr', 'broom', 'Hmisc', 'survey', 'tidyverse')
+knitr::opts_chunk$set(echo = TRUE)
+df_combined <- readRDS('./data/combined.Rds')
+df_male <- readRDS('./data/male.Rds')
+df_female <- readRDS('./data/female.Rds')
+svy1 <- svydesign(ids = df_combined$SEQN,
+                  weights = df_combined$weight_mec,
+                  data = df_combined)
+```
+
+## Main study
+### Blood Cholesterol
+```{r chol, echo=FALSE}
+# Unweighted
+ggplot(df_combined,
+       aes(x = bld_tc)
+       ) +
+  geom_histogram(
+    aes(y = ..density..),
+    color = 'black',
+    binwidth = 7.5,
+    fill = 'grey') +
+  stat_density(geom = 'line',
+               aes(color = 'x')
+               ) +
+  stat_function(
+    fun = dnorm,
+    args = list(
+      mean = mean(df_combined$bld_tc),
+      sd = sd(df_combined$bld_tc)),
+    aes(color = 'xx')
+    ) +
+  scale_color_manual(
+    name = '',
+    values = c('red', 'blue'),
+    breaks = c('x', 'xx'),
+    labels = c('kernal', 'normal')
+    ) +
+  ggtitle('Blood Cholesterol distribution, unweighted study population') +
+  theme(legend.position = 'bottom', legend.direction = 'horizontal') +
+  scale_y_continuous(
+    sec.axis = sec_axis(trans = ~.*length(na.omit(df_combined$bld_tc)),
+                        name = 'count')
+  ) +
+  xlab('total cholesterol (mg/dL)')
+
+# Unweighted normal Q-Q plot
+qqnorm(df_combined$bld_tc);qqline(df_combined$bld_tc, col = 2)
+
+# Weighted
+ggplot(df_combined,
+       aes(x = bld_tc, weight = weight_mec)
+) +
+    geom_histogram(
+        aes(y = ..density..),
+        color = 'black',
+        binwidth = 7.5,
+        fill = 'grey') +
+    stat_density(geom = 'line',
+                 aes(color = 'x')
+    ) +
+    stat_function(
+        fun = dnorm,
+        args = list(
+            mean = wtd.mean(df_combined$bld_tc, df_combined$weight_mec),
+            sd = wtd.var(df_combined$bld_tc, df_combined$weight_mec) %>% 
+              sqrt()),
+        aes(color = 'xx')
+    ) +
+    scale_color_manual(
+        name = '',
+        values = c('red', 'blue'),
+        breaks = c('x', 'xx'),
+        labels = c('kernal', 'normal')
+    ) +
+    ggtitle('Blood Cholesterol distribution, weighted study population') +
+    theme(legend.position = 'bottom', legend.direction = 'horizontal') +
+    scale_y_continuous(
+        sec.axis = sec_axis(trans = ~.*106745272)) +
+    xlab('total cholesterol (mg/dL)')
+```
+
+Shapiro-Wilk normality test for unweighted histogram: p = `r (shapiro.test(df_combined$bld_tc) %>% tidy())[2]`
+
+```{r chol_gender, echo=FALSE}
+# Gender split histogram
+ggplot(df_combined,
+       aes(x = bld_tc,
+           color = as.factor(gender),
+           fill = as.factor(gender))
+       ) +
+  geom_histogram(alpha = 1, position = 'dodge', binwidth = 10) +
+  scale_color_manual(name = 'Gender',
+                     labels = c('Female', 'Male'),
+                     values = c('2', 'darkblue'),
+                     ) +
+    scale_fill_manual(name = 'Gender',
+                     labels = c('Female', 'Male'),
+                     values = c('lightpink', 'lightblue'),
+                     ) +
+  ggtitle('Blood TC distribution by gender, unweighted') +
+  theme(legend.position = 'bottom', legend.direction = 'horizontal') +
+  xlab('total cholesterol (mg/dL)')
+```
+
+Male proportion of unweighted study population: `r round(((prop.table(table(df_combined$gender))[2])*100), 1) %>% format(nsmall = 1)`%
+
+```{r chol_table, echo=FALSE}
+# Table
+tc_tot <- summary(df_combined$bld_tc)[c(1, 3, 4, 6)] %>% round(2)
+tc_male <- summary(df_male$bld_tc)[c(1, 3, 4, 6)] %>% round(2)
+tc_female <- summary(df_female$bld_tc)[c(1, 3, 4, 6)] %>% round(2)
+tc_cats <- c('Min', 'Median', 'Mean', 'Max')
+tc_tbl <- tibble(Statistic = tc_cats, 
+                   Total = tc_tot, 
+                   Male = tc_male, 
+                   Female = tc_female)
+tc_tbl %>% kable(caption = 'Cholesterol (mg/dL) breakdown, unweighted')
+```
+
+Total n = `r length(na.omit(df_combined$bld_tc))`
+
+Male n = `r length(na.omit(df_male$bld_tc))`
+
+Female n = `r length(na.omit(df_female$bld_tc))`
+
+### Working hours
+```{r work, echo=FALSE}
+# Unweighted
+ggplot(df_combined,
+       aes(x = wrk_hrs)
+       ) +
+  geom_histogram(
+    color = 'black',
+    binwidth = 5,
+    fill = 'grey') +
+  ggtitle('Working Hours distribution, unweighted study population') +
+  theme(legend.position = 'bottom', legend.direction = 'horizontal') +
+    geom_vline(
+    aes(xintercept = mean(wrk_hrs, na.rm = T), color = 'mean'),
+    size = 1,
+    linetype = 'dashed'
+  ) +
+  geom_vline(
+    aes(xintercept = median(wrk_hrs, na.rm = T), color = 'median'),
+    size = 1,
+    linetype = 'dashed'
+  ) +
+  scale_color_manual(name = 'statistics',
+                     values = c(median = 'blue', mean = 'red')) +
+  xlab('prior week working hours')
+
+# Weighted
+ggplot(df_combined,
+       aes(x = wrk_hrs, weight = weight_mec)
+       ) +
+  geom_histogram(
+    color = 'black',
+    binwidth = 5,
+    fill = 'grey') +
+  ggtitle('Working Hours distribution, weighted study population') +
+  theme(legend.position = 'bottom', legend.direction = 'horizontal') +
+    geom_vline(
+    aes(xintercept = svymean(~wrk_hrs, svy1), color = 'mean'),
+    size = 1,
+    linetype = 'dashed'
+    ) +
+  geom_vline(aes(xintercept = as.numeric(svyquantile(
+    ~wrk_hrs, svy1, 0.5, ci = F)),
+    color = 'median'),
+    size = 1,
+    linetype = 'dashed'
+    ) +
+  scale_color_manual(name = 'statistics',
+                     values = c(median = 'blue', mean = 'red')) +
+  xlab('prior week working hours')
+
+# Unweighted gender split histogram
+ggplot(df_combined,
+       aes(x = wrk_hrs,
+           color = as.factor(gender),
+           fill = as.factor(gender))
+       ) +
+  geom_histogram(alpha = 1, position = 'dodge', binwidth = 5) +
+  scale_color_manual(name = 'Gender',
+                     labels = c('Female', 'Male'),
+                     values = c('2', 'darkblue'),
+                     ) +
+    scale_fill_manual(name = 'Gender',
+                     labels = c('Female', 'Male'),
+                     values = c('lightpink', 'lightblue'),
+                     ) +
+  ggtitle('Working Hours distribution by gender, unweighted') +
+  theme(legend.position = 'bottom', legend.direction = 'horizontal') +
+  xlab('prior week working hours')
+
+# Table
+wrk_tot <- summary(df_combined$wrk_hrs)[c(1, 3, 4, 6)] %>% round(2)
+wrk_male <- summary(df_male$wrk_hrs)[c(1, 3, 4, 6)] %>% round(2)
+wrk_female <- summary(df_female$wrk_hrs)[c(1, 3, 4, 6)] %>% round(2)
+wrk_cats <- c('Min', 'Median', 'Mean', 'Max')
+wrk_tbl <- tibble(Statistic = wrk_cats, 
+                   Total = wrk_tot, 
+                   Male = wrk_male, 
+                   Female = wrk_female)
+wrk_tbl %>% kable(caption = 'Working Hours breakdown, unweighted')
+
+```
+
+Total n = `r length(na.omit(df_combined$wrk_hrs))`
+
+Male n = `r length(na.omit(df_male$wrk_hrs))`
+
+Female n = `r length(na.omit(df_female$wrk_hrs))`
+
+## Demographics
+### Age
+```{r age, echo=FALSE}
+# Unweighted histogram
+ggplot(df_combined,
+       aes(x = age)
+       ) +
+  geom_histogram(
+    aes(y = ..density..),
+    color = 'black',
+    binwidth = 2,
+    fill = 'grey') +
+  stat_density(geom = 'line',
+               aes(color = 'x')
+               ) +
+  stat_function(
+    fun = dnorm,
+    args = list(
+      mean = mean(df_combined$age),
+      sd = sd(df_combined$age)),
+    aes(color = 'xx')
+    ) +
+  scale_color_manual(
+    name = '',
+    values = c('red', 'blue'),
+    breaks = c('x', 'xx'),
+    labels = c('kernal', 'normal')
+    ) +
+  ggtitle('Age distribution, unweighted study population') +
+  theme(legend.position = 'bottom', legend.direction = 'horizontal') +
+  scale_y_continuous(
+    sec.axis = sec_axis(trans = ~.*length(na.omit(df_combined$age)),
+                        name = 'count')
+  )
+
+# Weighted histogram
+ggplot(df_combined,
+       aes(x = age, weight = weight_mec)
+       ) +
+  geom_histogram(
+    aes(y = ..density..),
+    color = 'black',
+    binwidth = 2,
+    fill = 'grey') +
+  stat_density(geom = 'line',
+               aes(color = 'x')
+               ) +
+  stat_function(
+    fun = dnorm,
+    args = list(
+      mean = wtd.mean(df_combined$age, df_combined$weight_mec),
+      sd = wtd.var(df_combined$age, df_combined$weight_mec) %>% sqrt()),
+    aes(color = 'xx')
+    ) +
+  scale_color_manual(
+    name = '',
+    values = c('red', 'blue'),
+    breaks = c('x', 'xx'),
+    labels = c('kernal', 'normal')
+    ) +
+  ggtitle('Age distribution, weighted study population') +
+  theme(legend.position = 'bottom', legend.direction = 'horizontal') +
+  scale_y_continuous(
+    sec.axis = sec_axis(trans = ~.*106745272,
+                        name = 'count')
+  )
+
+# Table
+age_tot <- summary(df_combined$age)[c(1, 3, 4, 6)] %>% round(2)
+age_male <- summary(df_male$age)[c(1, 3, 4, 6)] %>% round(2)
+age_female <- summary(df_female$age)[c(1, 3, 4, 6)] %>% round(2)
+age_cats <- c('Min', 'Median', 'Mean', 'Max')
+age_tbl <- tibble(Statistic = age_cats, 
+                   Total = age_tot, 
+                   Male = age_male, 
+                   Female = age_female)
+age_tbl %>% kable(caption = 'Age breakdown, unweighted')
+```
+
+Total n = `r length(na.omit(df_combined$age))`
+
+Male n = `r length(na.omit(df_male$age))`
+
+Female n = `r length(na.omit(df_female$age))`
+
+### Race/Ethnicity
+```{r race, echo=FALSE}
+race_tot <- round(
+  prop.table(table(df_combined$race_eth))
+  *100, 2
+)
+race_male <- round(
+  prop.table(table(df_male$race_eth))
+  *100, 2
+)
+race_female <- round(
+  prop.table(table(df_female$race_eth))
+  *100, 2
+)
+race_cats <- c('Mexican American',
+               'Other Hispanic',
+               'Non-Hispanic White',
+               'Non-Hispanic Black',
+               'Non-Hispanic Asian',
+               'Other/Multi-Racial')
+race_tbl <- tibble(Category = race_cats, 
+                   Total = race_tot, 
+                   Male = race_male, 
+                   Female = race_female)
+race_tbl %>% kable(caption = 'Values in %')
+```
+
+Total n = `r length(na.omit(df_combined$race_eth))`
+
+Male n = `r length(na.omit(df_male$race_eth))`
+
+Female n = `r length(na.omit(df_female$race_eth))`
+
+### Education
+```{r education, echo=FALSE}
+edu_tot <- round(
+  prop.table(table(df_combined$education))
+  *100, 2
+)
+edu_male <- round(
+  prop.table(table(df_male$education))
+  *100, 2
+)
+# Add NA for the 'Refused' response
+edu_male <- c(edu_male[1:5], NA, edu_male[6])
+
+edu_female <- round(
+  prop.table(table(df_female$education))
+  *100, 2
+)
+# Add NA for the 'Does not know' response
+edu_female <- c(edu_female[1:6], NA)
+
+edu_cats <- c('Less than high school',
+              'Incomplete high school',
+              'High school or GED',
+              'Some college or AA degree',
+              'College graduate or above',
+              'Refused',
+              'Does not know')
+edu_tbl <- tibble(Category = edu_cats,
+                  Total = edu_tot,
+                  Male = edu_male,
+                  Female = edu_female)
+edu_tbl %>% kable(caption = 'Values in %, unweighted')
+```
+
+Total n = `r length(na.omit(df_combined$education))`
+
+Male n = `r length(na.omit(df_male$education))`
+
+Female n = `r length(na.omit(df_female$education))`
+
+### Poverty
+```{r poverty, echo=FALSE}
+# Unweighted
+ggplot(df_combined,
+       aes(x = income_pov_ratio)
+       ) +
+  geom_histogram(binwidth = 0.5,
+                 na.rm = T,
+                 fill = 'grey',
+                 color = 'black') +
+  labs(x = 'ratio',
+       title = 'Income to Poverty Ratio, unweighted study population') +
+  geom_vline(
+    aes(xintercept = mean(income_pov_ratio, na.rm = T), color = 'mean'),
+    size = 1,
+    linetype = 'dashed'
+  ) +
+  geom_vline(
+    aes(xintercept = median(income_pov_ratio, na.rm = T), color = 'median'),
+    size = 1,
+    linetype = 'dashed'
+  ) +
+  scale_color_manual(name = 'statistics',
+                     values = c(median = 'blue', mean = 'red'))
+
+# Weighted
+ggplot(df_combined,
+       aes(x = income_pov_ratio, weight = weight_mec)
+       ) +
+  geom_histogram(binwidth = 0.5,
+                 na.rm = T,
+                 fill = 'grey',
+                 color = 'black') +
+  labs(x = 'ratio',
+       title = 'Income to Poverty Ratio, weighted study population') +
+  geom_vline(
+    aes(xintercept = svymean(~income_pov_ratio, svy1, na.rm = T), color = 'mean'),
+    size = 1,
+    linetype = 'dashed') +
+  geom_vline(
+    aes(xintercept = as.numeric(svyquantile(~income_pov_ratio,
+                                            svy1, 0.5,
+                                            ci = F,
+                                            na.rm = T)[1]),
+        color = 'median'),
+    size = 1,
+    linetype = 'dashed') +
+  scale_color_manual(name = 'statistics',
+                     values = c(median = 'blue', mean = 'red'))
+```
+
+Poverty is based on family size, income, and location. A value of `1` represents the poverty threshold. Ratios over `5` are categorized as `5` to preserve anonymity.
+
+```{r poverty_gender, echo=FALSE}
+# Organized as: total, male, female
+pov_tot <- summary(df_combined$income_pov_ratio)[c(1, 3, 4, 6)] %>% 
+  round(2)
+pov_male <- summary(df_male$income_pov_ratio)[c(1, 3, 4, 6)] %>% 
+  round(2)
+pov_female <- summary(df_female$income_pov_ratio)[c(1, 3, 4, 6)] %>% 
+  round(2)
+pov_cats <- c('Min', 'Median', 'Mean', 'Max')
+pov_tbl <- tibble(Statistic = pov_cats, 
+                   Total = pov_tot, 
+                   Male = pov_male, 
+                   Female = pov_female)
+pov_tbl %>% kable(caption = 'Poverty Ratios, unweighted')
+```
+
+Total n = `r length(na.omit(df_combined$income_pov_ratio))`
+
+Male n = `r length(na.omit(df_male$income_pov_ratio))`
+
+Female n = `r length(na.omit(df_female$income_pov_ratio))`
+
+## Questionnaire
+### Doctor opinion
+```{r doctor_hi, echo=FALSE}
+# Unweighted
+ggplot(df_combined,
+       aes(x = as.factor(chol_doctor_hi))) +
+  geom_bar(color = 'black',
+           fill = 'grey') +
+  geom_text(aes(label = ..count..),
+            stat = 'count',
+            color = 'black',
+            vjust = -0.5) +
+  scale_x_discrete(labels = c('yes', 'no', 'does not know')) +
+  theme(axis.title.x = element_blank()) +
+  labs(title = 'Doctor says cholesterol is high, unweighted')
+
+# Weighted
+ggplot(df_combined,
+       aes(x = as.factor(chol_doctor_hi), weight =weight_mec)) +
+  geom_bar(color = 'black',
+           fill = 'grey') +
+  geom_text(aes(label = format(..count..), digits = 1),
+            stat = 'count',
+            color = 'black',
+            vjust = -0.5) +
+  scale_x_discrete(labels = c('yes', 'no', 'does not know')) +
+  theme(axis.title.x = element_blank()) +
+  labs(title = 'Doctor says cholesterol is high, weighted')
+
+doc_tot <- round(
+  prop.table(table(df_combined$chol_doctor_hi))
+  *100, 2
+)
+doc_male <- round(
+  prop.table(table(df_male$chol_doctor_hi))
+  *100, 2
+)
+doc_female <- round(
+  prop.table(table(df_female$chol_doctor_hi))
+  *100, 2
+)
+doc_cats <- c('Yes', 'No', 'Does not know')
+
+doc_tbl <- tibble(Category = doc_cats,
+                  Total = doc_tot,
+                  Male = doc_male,
+                  Female = doc_female)
+
+doc_tbl %>% kable(caption = 'Values in %, unweighted')
+```
+
+Total n = `r length(na.omit(df_combined$chol_doctor_hi))`
+
+Male n = `r length(na.omit(df_male$chol_doctor_hi))`
+
+Female n = `r length(na.omit(df_female$chol_doctor_hi))`
+
+### Sitting minutes
+```{r sit, echo=FALSE}
+# Unweighted
+qplot(df_combined$sitting_min_daily,
+      binwidth = 65,
+      na.rm = T,
+      color = I('black'),
+      fill = I('grey')) +
+    labs(title = 'Daily sitting minutes, unweighted population',
+       x = 'minutes',
+       y = 'count')
+
+# Weighted
+ggplot(df_combined,
+       aes(x = sitting_min_daily, weight = weight_mec)) +
+  geom_histogram(binwidth = 65,
+                 na.rm = T,
+                 color = 'black',
+                 fill = 'grey') +
+  labs(title = 'Daily sitting minutes, weighted population',
+       x = 'minutes',
+       y = 'count')
+
+# Table
+sit_tot <- summary(df_combined$sitting_min_daily)[c(1, 3, 4, 6)] %>% 
+  round(2)
+sit_male <- summary(df_male$sitting_min_daily)[c(1, 3, 4, 6)] %>% 
+  round(2)
+sit_female <- summary(df_female$sitting_min_daily)[c(1, 3, 4, 6)] %>% 
+  round(2)
+sit_tot <- sit_tot %>% 
+  round(2)
+sit_male <- sit_male %>% 
+  round(2)
+sit_female <- sit_female %>% 
+  round(2)
+sit_cats <- c('Min', 'Median', 'Mean', 'Max')
+sit_tbl <- tibble(Statistic = sit_cats, 
+                   Total = sit_tot, 
+                   Male = sit_male, 
+                   Female = sit_female)
+sit_tbl %>% kable(caption = 'Gender breakdown, unweighted')
+```
+
+Total n = `r length(na.omit(df_combined$sitting_min_daily))`
+
+Male n = `r length(na.omit(df_male$sitting_min_daily))`
+
+Female n = `r length(na.omit(df_female$sitting_min_daily))`
+
+### Vigorous activity at work
+```{r phys_work, echo=FALSE}
+phys_w_tot <- round(
+  prop.table(table(df_combined$phys_work_vig))
+  *100, 2
+)
+phys_w_male <- round(
+  prop.table(table(df_male$phys_work_vig))
+  *100, 2
+)
+# Add NA for the 'Does not know' column
+phys_w_male <- c(phys_w_male, NA)
+phys_w_female <- round(
+  prop.table(table(df_female$phys_work_vig))
+  *100, 2
+)
+phys_w_cats <- c('Yes', 'No', 'Does not know')
+
+phys_w_tbl <- tibble(Category = phys_w_cats,
+                  Total = phys_w_tot,
+                  Male = phys_w_male,
+                  Female = phys_w_female)
+
+phys_w_tbl %>% kable(caption = 'Values in %, unweighted')
+
+```
+
+Total n = `r length(na.omit(df_combined$phys_work_vig))`
+
+Male n = `r length(na.omit(df_male$phys_work_vig))`
+
+Female n = `r length(na.omit(df_female$phys_work_vig))`
+
+### Vigorous recreational activity
+```{r phys_rec, echo=FALSE}
+phys_r_tot <- round(
+  prop.table(table(df_combined$phys_rec_vig))
+  *100, 2
+)
+phys_r_male <- round(
+  prop.table(table(df_male$phys_rec_vig))
+  *100, 2
+)
+phys_r_female <- round(
+  prop.table(table(df_female$phys_rec_vig))
+  *100, 2
+)
+phys_r_cats <- c('Yes', 'No')
+
+phys_r_tbl <- tibble(Category = phys_r_cats,
+                  Total = phys_r_tot,
+                  Male = phys_r_male,
+                  Female = phys_r_female)
+
+phys_r_tbl %>% kable(caption = 'Values in %, unweighted')
+
+```
+
+Total n = `r length(na.omit(df_combined$phys_rec_vig))`
+
+Male n = `r length(na.omit(df_male$phys_rec_vig))`
+
+Female n = `r length(na.omit(df_female$phys_rec_vig))`

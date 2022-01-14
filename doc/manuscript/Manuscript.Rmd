@@ -1,0 +1,70 @@
+---
+title: Is greater number of hours worked in the prior week associated with high total blood cholesterol among men and women ages 18-80 from NHANES 2017-2018 participants of the United States?
+author:
+    name: Christian Hicks
+    email: chicks5799@sdsu.edu
+    affiliation: San Diego State University School of Public Health
+abstract: |
+  This is the abstract.
+
+  It consists of two paragraphs.
+
+date: "`r Sys.Date()`"
+journal: N/A
+bibliography: references.bib
+#linenumbers: true
+#numbersections: true
+csl: elsevier-vancouver.csl
+output: rticles::elsevier_article
+link-citations: true
+urlcolor: blue
+header-includes:
+  \usepackage{setspace}\doublespacing
+---
+
+Introduction
+==========================
+
+### Epidemiology of the outcome
+
+The NIH’s National Heart, Lung, and Blood Institute defines high cholesterol as having total blood cholesterol (TC) levels greater than or equal to 200 mg/dL [@nhlbi2001]. More than one third of the United States adult population has high cholesterol and therefore are at a heightened risk for cardiovascular disease (CVD) and stroke [@virani2021]. Established risk factors of high cholesterol include obesity, lack of physical activity, diet high in saturated and trans fat, type 2 diabetes, smoking, age, gender, and family history of high cholesterol [@cdc2020].
+
+According to the American Heart Association’s Heart Disease and Stroke Statistics—2021 Update, adults aged 20 and older in 2015-2018 had a mean TC of 190.6 mg/dL [@virani2021]. This was not within the Healthy People 2020 target goal of 177.9 mg/dL. It was also estimated that 93.9 million, or 38.1%, of U.S. adults had greater than 200 mg/dL TC. For TC greater than 240 mg/dL the estimated affected adults were 28 million, or 11.5%. Although the prevalence of high TC in adults had decreased from 18.3% in 2000 to 10.5% in 2018, the report states that the decline is likely due to greater uptake of medications rather than changes in lifestyle. The estimated economic burden of managing and preventing high cholesterol in the U.S. is between $18.5 million and $77 million every year. The estimated burden of CVD, an outcome of having high cholesterol, is $219 billion [@ferrara2021].
+
+
+### Epidemiology of the exposure
+
+During 2019 in the U.S., the Bureau of Labor Statistics reported full-time employees spent an average of 8.78 hours per workday on work or work-related activities. This becomes 43.9 hours throughout a 5-day workweek. Globally, 36.1% of workers exceed 48 hours each week [@rivera2020]. These numbers surpass many developed countries’ standards and recommendations. The Australian government mandates employers must not work their employees over 38 hours per week without reason. The European Union states that employers ensure their workers do not exceed an average of 48 hours per week including overtime. The U.S. Fair Labor and Standards Act [@flsa1938] requires overtime pay after 40 hours in a week for nonexempt employees, and there is no maximum number of hours.
+
+When defining long working hours in research, prior studies have used various cut points such as >40 per week [@rivera2020], >80 hours per week [@lee2016], and >11 hours per day [@lemke2017]. According to the U.S. Patient Protection and Affordable Care Act [@ppaca2010], employees working at least 30 hours per week on average are considered full-time. Working long hours leaves less time for reaching the CDC’s guidelines of recommended exercise, diet, and sleep [@artazcoz2009]. It also can expose individuals to greater amounts of work strain and psychological stress. These experiences have been shown to increase other biomarkers such as blood pressure and heart rate instability [@kivimaki2018].
+
+### Literature review
+
+In 1999 a study examined blood cholesterol of engineers in Japan working in machinery manufacturing [@sasaki1999]. No significant differences were directly shown between the weekly working hours of <57, 57-63, and >63. They did note though that a stratification by age resulted with an interaction for the age group of 30-39, but not the age group of 20-29. The group with 57-63 work hours had a higher mean TC than the other two groups.
+
+A survey of random working adults in France described that exposure to long working hours, defined as +10-hour days in at least 50 days out of the year, was associated with adverse lipid levels in men [@virtanen2019]. Their results were not significant for women.
+
+In a meta-analysis of long working hours, coronary heart disease, and stroke resulted with a 27% increased risk of stroke in working 49-54 hours per week compared to 36-40 hours [@kivimaki2015]. The risk of those working more than 55 hours was 33% greater.
+
+Researchers examining data from the Korean NHANES data showed 1.76 times higher odds of coronary heart disease for men and 1.63 times higher odds for women working >80 hours per week compared to those working 40 hours per week [@lee2016]. The risk of stroke in these two working groups for men was insignificant, but women working >80 hours had 2.32 times higher odds of stroke than women working 40 hours.
+
+A cross-sectional study of U.S. truck drivers was performed to explore an effect of long working hours and blood cholesterol measurements [@lemke2017]. The study population had a mean low-density lipoprotein cholesterol (LDL-C) of 113.66 mg/dL. When designing a linear regression model, working greater than 11 hours per day significantly increased the estimated LDL-C 14.24 mg/dL.
+
+22-year-old Australians from the Western Australian Pregnancy Cohort Study examined the effect of long working hours on blood cholesterol measurements [@reynolds2018]. There were no significant results of TC or LDL-C, but high-density lipoprotein cholesterol (HDL-C) was lower in those working >38 hours compared to those working 38 hours or less.
+
+### Gaps in the literature
+
+Most prior studies of long working hours used CHD or stroke as the outcome rather than blood cholesterol measurements. Of the studies that did examine blood cholesterol they were either not done in the United States, had very high cut points for defining long hours, or did not describe comparisons in risk or odds.
+
+### Summary
+
+U.S. adults spend an average of 8.78 hours per workday on work-related activities, exceeding the standardized 40-hour workweek and reducing available time for healthy behaviors such as sleep and exercise, and increasing exposure to job-related stress. During 2013-2016 U.S. adults had a mean TC of 190.6 mg/dL, which is above the Healthy People 2020 goal of 177.9 mg/dL. 93.9 million adults (38.1%) had a TC of 200 mg/dL or greater. 28 million adults (11.5%) had a TC of 240 mg/dL or greater. High cholesterol is estimated to burden the U.S. with a cost between $18.5 million and $77 million each year. CVD, a result of having high cholesterol, is estimated to cost the U.S. $219 billion dollars.
+
+Prior research has examined long working hours and its association with blood cholesterol levels but they either studied populations outside of the U.S. or had very high cut points for working hours. This analysis is unique in that it studies a random selection of U.S. adults and lowers the cut points in order to produce results more closely related to the general U.S. adult population.
+
+### Research question
+
+Is greater number of hours worked in the prior week associated with subsequent high total blood cholesterol among adults aged 18-80 in the United States, using NHANES 2017-2018 participant data? **H0:** There is not an association between greater working hours in the past week and high total blood cholesterol. **H1:** There is a significant positive association between greater working hours in the past week and high total blood cholesterol.
+
+References {#references .unnumbered}
+==========

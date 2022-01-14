@@ -1,0 +1,207 @@
+---
+title: "Bivariate Analyses with Total Blood Cholesterol"
+author: "Christian Hicks"
+date: "Last compiled on `r format(Sys.time(), '%d %B %Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE, cache=FALSE}
+pacman::p_load('knitr', 'broom', 'survey', 'tidyverse')
+knitr::read_chunk('../src/bivariate/biv_work.R')
+knitr::read_chunk('../src/bivariate/biv_age.R')
+knitr::read_chunk('../src/bivariate/biv_bmi.R')
+knitr::read_chunk('../src/bivariate/biv_gender.R')
+knitr::read_chunk('../src/bivariate/biv_race.R')
+knitr::read_chunk('../src/bivariate/biv_education.R')
+knitr::read_chunk('../src/bivariate/biv_poverty.R')
+knitr::read_chunk('../src/bivariate/biv_doctor.R')
+knitr::read_chunk('../src/bivariate/biv_sitting.R')
+knitr::read_chunk('../src/bivariate/biv_phys_work.R')
+knitr::read_chunk('../src/bivariate/biv_phys_rec.R')
+opts_chunk$set(echo = TRUE)
+df_combined <- readRDS('data/combined.Rds')
+attach(df_combined)
+
+# Factorizing variables
+gender <- as.factor(gender)
+chol_doctor_hi <- as.factor(chol_doctor_hi)
+phys_work_vig <- as.factor(phys_work_vig)
+phys_rec_vig <- as.factor(phys_rec_vig)
+race_eth <- as.factor(race_eth)
+education <- as.factor(education)
+chol_label <- 'total cholesterol (mg/dL)'
+quant <- c(0.25, 0.5, 0.75)
+
+# Weighted data
+svy1 <- svydesign(ids = df_combined$SEQN,
+                  weights = df_combined$weight_mec,
+                  data = df_combined)
+```
+
+## Main Study
+
+### Working Hours
+```{r wrk_reg, include=FALSE}
+```
+
+```{r wrk_hrs_output, echo=FALSE}
+```
+
+Correlation: `r c_wrk_wtd`
+
+## Demographics
+
+### Age
+```{r age_reg, include=FALSE}
+```
+
+```{r age_output, echo=FALSE}
+```
+
+Correlation: `r c_age_wtd`
+
+### BMI
+
+```{r bmi_reg, include=FALSE}
+```
+
+```{r bmi_output, echo=FALSE}
+```
+
+Correlation: `r c_bmi_wtd`
+
+### Gender
+```{r gender_tt, include=FALSE}
+```
+
+```{r gender_output, echo=FALSE}
+```
+
+T test:
+
+`r ttest_gen_wtd %>% tidy() %>% kable()`
+
+Female mean (SD): `r mean_gen_f_wtd[1] %>% format(digits = 5)` (`r sd_gen_f_wtd %>% format(digits = 4)`)
+
+Male mean (SD): `r mean_gen_m_wtd[1] %>% format(digits = 5)` (`r sd_gen_m_wtd %>% format(digits = 5)`)
+
+### Race/Ethnicity
+```{r race_anova, include=FALSE}
+```
+
+```{r race_output, echo=FALSE}
+```
+
+ANOVA:
+
+`r anova_race_wtd %>% tidy() %>% kable()`
+
+Pairwise:
+
+`r pw_race_wtd %>% kable()`
+
+Hispanic mean (SD): `r mean_race_1_wtd %>% format(digits = 6)` (`r sd_race_1_wtd %>% format(digits = 4)`)
+
+Non-Hispanic White mean (SD): `r mean_race_3_wtd %>% format(digits = 5)` (`r sd_race_3_wtd %>% format(digits = 4)`)
+
+Non-Hispanic Black mean (SD): `r mean_race_4_wtd %>% format(digits = 5)` (`r sd_race_4_wtd %>% format(digits = 5)`)
+
+Non-Hispanic Asian mean (SD): `r mean_race_6_wtd %>% format(digits = 5)` (`r sd_race_6_wtd %>% format(digits = 4)`)
+
+Other race or Multi-Racial mean (SD): `r mean_race_7_wtd %>% format(digits = 5)` (`r sd_race_7_wtd %>% format(digits = 4)`)
+
+### Education
+```{r education_anova, include=FALSE}
+```
+
+```{r education_output, echo=FALSE}
+```
+
+ANOVA:
+
+`r anova_edu_wtd %>% tidy() %>% kable()`
+
+No H.S. diploma mean (SD): `r mean_edu_1_wtd %>% format(digits = 5)` (`r sd_edu_1_wtd %>% format(digits = 4)`)
+
+H.S. or GED mean (SD): `r mean_edu_3_wtd %>% format(digits = 5)` (`r sd_edu_3_wtd %>% format(digits = 4)`)
+
+Some college mean (SD): `r mean_edu_4_wtd %>% format(digits = 5)` (`r sd_edu_4_wtd %>% format(digits = 5)`)
+
+College graduate mean (SD): `r mean_edu_5_wtd %>% format(digits = 5)` (`r sd_edu_5_wtd %>% format(digits = 4)`)
+
+### Povery ratio
+```{r poverty_reg, include=FALSE}
+```
+
+```{r poverty_output, echo=FALSE}
+```
+
+Correlation: `r c_pov_wtd`
+
+## Questionnaire
+
+### Doctor Opinion
+```{r doctor_tt, include=FALSE}
+```
+
+```{r doctor_output, echo=FALSE}
+```
+
+ANOVA: 
+
+`r anova_doc_wtd %>% tidy() %>% kable()`
+
+(p value = 3.25e-34)
+
+Pairwise:
+
+`r pw_doc_wtd %>% kable()`
+
+(1st p value = 2.41e-40)
+
+Yes mean (SD): `r mean_doc_yes_wtd %>% format(digits = 5)` (`r sd_doc_yes_wtd %>% format(digits = 5)`)
+
+No mean (SD): `r mean_doc_no_wtd %>% format(digits = 6)` (`r sd_doc_no_wtd %>% format(digits = 5)`)
+
+Don't know mean (SD): `r mean_doc_dont_wtd %>% format(digits = 4)` (`r sd_doc_dont_wtd %>% format(digits = 5)`)
+
+### Sitting minutes
+```{r sitting_reg, include=FALSE}
+```
+
+```{r sitting_output, echo=FALSE}
+```
+
+Correlation: `r c_sit_wtd`
+
+### Vigorous work activity
+```{r phys_work_ttest, include=FALSE}
+```
+
+```{r phys_work_output, echo=FALSE}
+```
+T test:
+
+`r ttest_vig_w_wtd %>% tidy() %>% kable()`
+
+Yes mean (SD): `r mean_vig_w_yes_wtd %>% format(digits = 5)` (`r sd_vig_w_yes_wtd %>% format(digits = 4)`)
+
+No mean (SD): `r mean_vig_w_no_wtd %>% format(digits = 5)` (`r sd_vig_w_no_wtd %>% format(digits = 4)`)
+
+### Vigorous recreational activity
+```{r phys_rec_tt, include=FALSE}
+```
+
+```{r phys_rec_output, echo=FALSE}
+```
+
+T test:
+
+`r ttest_vig_r_wtd %>% tidy() %>% kable()`
+
+Yes mean (SD): `r mean_vig_r_yes_wtd %>% format(digits = 5)` (`r sd_vig_r_yes_wtd %>% format(digits = 4)`)
+
+No mean (SD): `r mean_vig_r_no_wtd %>% format(digits = 5)` (`r sd_vig_r_no_wtd %>% format(digits = 4)`)

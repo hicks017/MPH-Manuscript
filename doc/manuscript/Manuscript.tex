@@ -1,0 +1,374 @@
+\documentclass[]{elsarticle} %review=doublespace preprint=single 5p=2 column
+%%% Begin My package additions %%%%%%%%%%%%%%%%%%%
+\usepackage[hyphens]{url}
+
+  \journal{N/A} % Sets Journal name
+
+
+\usepackage{lineno} % add
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+\usepackage{graphicx}
+%%%%%%%%%%%%%%%% end my additions to header
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \usepackage{fontspec}
+  \ifxetex
+    \usepackage{xltxtra,xunicode}
+  \fi
+  \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+  \newcommand{\euro}{€}
+\fi
+% use microtype if available
+\IfFileExists{microtype.sty}{\usepackage{microtype}}{}
+\bibliographystyle{elsarticle-harv}
+\ifxetex
+  \usepackage[setpagesize=false, % page size defined by xetex
+              unicode=false, % unicode breaks when used with xetex
+              xetex]{hyperref}
+\else
+  \usepackage[unicode=true]{hyperref}
+\fi
+\hypersetup{breaklinks=true,
+            bookmarks=true,
+            pdfauthor={},
+            pdftitle={Is greater number of hours worked in the prior week associated with high total blood cholesterol among men and women ages 18-80 from NHANES 2017-2018 participants of the United States?},
+            colorlinks=true,
+            urlcolor=blue,
+            linkcolor=magenta,
+            pdfborder={0 0 0}}
+\urlstyle{same}  % don't use monospace font for urls
+
+\setcounter{secnumdepth}{0}
+% Pandoc toggle for numbering sections (defaults to be off)
+\setcounter{secnumdepth}{0}
+
+% Pandoc citation processing
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+% for Pandoc 2.8 to 2.10.1
+\newenvironment{cslreferences}%
+  {}%
+  {\par}
+% For Pandoc 2.11+
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1 \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces\fi
+  % set entry spacing
+  \ifnum #2 > 0
+  \setlength{\parskip}{#2\baselineskip}
+  \fi
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+
+% Pandoc header
+\usepackage{setspace}\doublespacing
+
+
+
+\begin{document}
+\begin{frontmatter}
+
+  \title{Is greater number of hours worked in the prior week associated
+with high total blood cholesterol among men and women ages 18-80 from
+NHANES 2017-2018 participants of the United States?}
+    \author[San Diego State University School of Public
+Health]{Christian Hicks}
+   \ead{chicks5799@sdsu.edu} 
+      
+  \begin{abstract}
+  This is the abstract.
+
+  It consists of two paragraphs.
+  \end{abstract}
+  
+ \end{frontmatter}
+
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
+
+\hypertarget{epidemiology-of-the-outcome}{%
+\subsubsection{Epidemiology of the
+outcome}\label{epidemiology-of-the-outcome}}
+
+The NIH's National Heart, Lung, and Blood Institute defines high
+cholesterol as having total blood cholesterol (TC) levels greater than
+or equal to 200 mg/dL {[}\protect\hyperlink{ref-nhlbi2001}{1}{]}. More
+than one third of the United States adult population has high
+cholesterol and therefore are at a heightened risk for cardiovascular
+disease (CVD) and stroke {[}\protect\hyperlink{ref-virani2021}{2}{]}.
+Established risk factors of high cholesterol include obesity, lack of
+physical activity, diet high in saturated and trans fat, type 2
+diabetes, smoking, age, gender, and family history of high cholesterol
+{[}\protect\hyperlink{ref-cdc2020}{3}{]}.
+
+According to the American Heart Association's Heart Disease and Stroke
+Statistics---2021 Update, adults aged 20 and older in 2015-2018 had a
+mean TC of 190.6 mg/dL {[}\protect\hyperlink{ref-virani2021}{2}{]}. This
+was not within the Healthy People 2020 target goal of 177.9 mg/dL. It
+was also estimated that 93.9 million, or 38.1\%, of U.S. adults had
+greater than 200 mg/dL TC. For TC greater than 240 mg/dL the estimated
+affected adults were 28 million, or 11.5\%. Although the prevalence of
+high TC in adults had decreased from 18.3\% in 2000 to 10.5\% in 2018,
+the report states that the decline is likely due to greater uptake of
+medications rather than changes in lifestyle. The estimated economic
+burden of managing and preventing high cholesterol in the U.S. is
+between \$18.5 million and \$77 million every year. The estimated burden
+of CVD, an outcome of having high cholesterol, is \$219 billion
+{[}\protect\hyperlink{ref-ferrara2021}{4}{]}.
+
+\hypertarget{epidemiology-of-the-exposure}{%
+\subsubsection{Epidemiology of the
+exposure}\label{epidemiology-of-the-exposure}}
+
+During 2019 in the U.S., the Bureau of Labor Statistics reported
+full-time employees spent an average of 8.78 hours per workday on work
+or work-related activities. This becomes 43.9 hours throughout a 5-day
+workweek. Globally, 36.1\% of workers exceed 48 hours each week
+{[}\protect\hyperlink{ref-rivera2020}{5}{]}. These numbers surpass many
+developed countries' standards and recommendations. The Australian
+government mandates employers must not work their employees over 38
+hours per week without reason. The European Union states that employers
+ensure their workers do not exceed an average of 48 hours per week
+including overtime. The U.S. Fair Labor and Standards Act
+{[}\protect\hyperlink{ref-flsa1938}{6}{]} requires overtime pay after 40
+hours in a week for nonexempt employees, and there is no maximum number
+of hours.
+
+When defining long working hours in research, prior studies have used
+various cut points such as \textgreater40 per week
+{[}\protect\hyperlink{ref-rivera2020}{5}{]}, \textgreater80 hours per
+week {[}\protect\hyperlink{ref-lee2016}{7}{]}, and \textgreater11 hours
+per day {[}\protect\hyperlink{ref-lemke2017}{8}{]}. According to the
+U.S. Patient Protection and Affordable Care Act
+{[}\protect\hyperlink{ref-ppaca2010}{9}{]}, employees working at least
+30 hours per week on average are considered full-time. Working long
+hours leaves less time for reaching the CDC's guidelines of recommended
+exercise, diet, and sleep
+{[}\protect\hyperlink{ref-artazcoz2009}{10}{]}. It also can expose
+individuals to greater amounts of work strain and psychological stress.
+These experiences have been shown to increase other biomarkers such as
+blood pressure and heart rate instability
+{[}\protect\hyperlink{ref-kivimaki2018}{11}{]}.
+
+\hypertarget{literature-review}{%
+\subsubsection{Literature review}\label{literature-review}}
+
+In 1999 a study examined blood cholesterol of engineers in Japan working
+in machinery manufacturing {[}\protect\hyperlink{ref-sasaki1999}{12}{]}.
+No significant differences were directly shown between the weekly
+working hours of \textless57, 57-63, and \textgreater63. They did note
+though that a stratification by age resulted with an interaction for the
+age group of 30-39, but not the age group of 20-29. The group with 57-63
+work hours had a higher mean TC than the other two groups.
+
+A survey of random working adults in France described that exposure to
+long working hours, defined as +10-hour days in at least 50 days out of
+the year, was associated with adverse lipid levels in men
+{[}\protect\hyperlink{ref-virtanen2019}{13}{]}. Their results were not
+significant for women.
+
+In a meta-analysis of long working hours, coronary heart disease, and
+stroke resulted with a 27\% increased risk of stroke in working 49-54
+hours per week compared to 36-40 hours
+{[}\protect\hyperlink{ref-kivimaki2015}{14}{]}. The risk of those
+working more than 55 hours was 33\% greater.
+
+Researchers examining data from the Korean NHANES data showed 1.76 times
+higher odds of coronary heart disease for men and 1.63 times higher odds
+for women working \textgreater80 hours per week compared to those
+working 40 hours per week {[}\protect\hyperlink{ref-lee2016}{7}{]}. The
+risk of stroke in these two working groups for men was insignificant,
+but women working \textgreater80 hours had 2.32 times higher odds of
+stroke than women working 40 hours.
+
+A cross-sectional study of U.S. truck drivers was performed to explore
+an effect of long working hours and blood cholesterol measurements
+{[}\protect\hyperlink{ref-lemke2017}{8}{]}. The study population had a
+mean low-density lipoprotein cholesterol (LDL-C) of 113.66 mg/dL. When
+designing a linear regression model, working greater than 11 hours per
+day significantly increased the estimated LDL-C 14.24 mg/dL.
+
+22-year-old Australians from the Western Australian Pregnancy Cohort
+Study examined the effect of long working hours on blood cholesterol
+measurements {[}\protect\hyperlink{ref-reynolds2018}{15}{]}. There were
+no significant results of TC or LDL-C, but high-density lipoprotein
+cholesterol (HDL-C) was lower in those working \textgreater38 hours
+compared to those working 38 hours or less.
+
+\hypertarget{gaps-in-the-literature}{%
+\subsubsection{Gaps in the literature}\label{gaps-in-the-literature}}
+
+Most prior studies of long working hours used CHD or stroke as the
+outcome rather than blood cholesterol measurements. Of the studies that
+did examine blood cholesterol they were either not done in the United
+States, had very high cut points for defining long hours, or did not
+describe comparisons in risk or odds.
+
+\hypertarget{summary}{%
+\subsubsection{Summary}\label{summary}}
+
+U.S. adults spend an average of 8.78 hours per workday on work-related
+activities, exceeding the standardized 40-hour workweek and reducing
+available time for healthy behaviors such as sleep and exercise, and
+increasing exposure to job-related stress. During 2013-2016 U.S. adults
+had a mean TC of 190.6 mg/dL, which is above the Healthy People 2020
+goal of 177.9 mg/dL. 93.9 million adults (38.1\%) had a TC of 200 mg/dL
+or greater. 28 million adults (11.5\%) had a TC of 240 mg/dL or greater.
+High cholesterol is estimated to burden the U.S. with a cost between
+\$18.5 million and \$77 million each year. CVD, a result of having high
+cholesterol, is estimated to cost the U.S. \$219 billion dollars.
+
+Prior research has examined long working hours and its association with
+blood cholesterol levels but they either studied populations outside of
+the U.S. or had very high cut points for working hours. This analysis is
+unique in that it studies a random selection of U.S. adults and lowers
+the cut points in order to produce results more closely related to the
+general U.S. adult population.
+
+\hypertarget{research-question}{%
+\subsubsection{Research question}\label{research-question}}
+
+Is greater number of hours worked in the prior week associated with
+subsequent high total blood cholesterol among adults aged 18-80 in the
+United States, using NHANES 2017-2018 participant data? \textbf{H0:}
+There is not an association between greater working hours in the past
+week and high total blood cholesterol. \textbf{H1:} There is a
+significant positive association between greater working hours in the
+past week and high total blood cholesterol.
+
+\hypertarget{references}{%
+\section*{References}\label{references}}
+\addcontentsline{toc}{section}{References}
+
+\hypertarget{refs}{}
+\begin{CSLReferences}{0}{0}
+\leavevmode\vadjust pre{\hypertarget{ref-nhlbi2001}{}}%
+\CSLLeftMargin{{[}1{]} }
+\CSLRightInline{NHLBI. {ATP III At}-{A}-{Glance}: Quick {Desk
+Reference}. National Institutes of Health 2001.}
+
+\leavevmode\vadjust pre{\hypertarget{ref-virani2021}{}}%
+\CSLLeftMargin{{[}2{]} }
+\CSLRightInline{Virani SS, Alonso A, Aparicio HJ, Benjamin EJ,
+Bittencourt MS, Callaway CW, et al. Heart {Disease} and {Stroke
+Statistics}\textemdash 2021 {Update}. Circulation 2021;143:e254--743.
+doi:\href{https://doi.org/10.1161/CIR.0000000000000950}{10.1161/CIR.0000000000000950}.}
+
+\leavevmode\vadjust pre{\hypertarget{ref-cdc2020}{}}%
+\CSLLeftMargin{{[}3{]} }
+\CSLRightInline{CDC. Knowing {Your Risk}: High {Cholesterol}. Centers
+for Disease Control and Prevention 2020.}
+
+\leavevmode\vadjust pre{\hypertarget{ref-ferrara2021}{}}%
+\CSLLeftMargin{{[}4{]} }
+\CSLRightInline{Ferrara P, Laura DD, Cortesi PA, Mantovani LG. The
+economic impact of hypercholesterolemia and mixed dyslipidemia: A
+systematic review of cost of illness studies. PLOS ONE 2021;16:e0254631.
+doi:\href{https://doi.org/10.1371/journal.pone.0254631}{10.1371/journal.pone.0254631}.}
+
+\leavevmode\vadjust pre{\hypertarget{ref-rivera2020}{}}%
+\CSLLeftMargin{{[}5{]} }
+\CSLRightInline{Rivera AS, Akanbi M, O'Dwyer LC, McHugh M. Shift work
+and long work hours and their association with chronic health
+conditions: A systematic review of systematic reviews with
+meta-analyses. PLOS ONE 2020;15:e0231037.
+doi:\href{https://doi.org/10.1371/journal.pone.0231037}{10.1371/journal.pone.0231037}.}
+
+\leavevmode\vadjust pre{\hypertarget{ref-flsa1938}{}}%
+\CSLLeftMargin{{[}6{]} }
+\CSLRightInline{Fair {Labor Standards Act} 1938:1060--70.}
+
+\leavevmode\vadjust pre{\hypertarget{ref-lee2016}{}}%
+\CSLLeftMargin{{[}7{]} }
+\CSLRightInline{Lee D-W, Hong Y-C, Min K-B, Kim T-S, Kim M-S, Kang M-Y.
+The effect of long working hours on 10-year risk of coronary heart
+disease and stroke in the {Korean} population: The {Korea National
+Health} and {Nutrition Examination Survey} ({KNHANES}), 2007 to 2013.
+Annals of Occupational and Environmental Medicine 2016;28.
+doi:\href{https://doi.org/10.1186/s40557-016-0149-5}{10.1186/s40557-016-0149-5}.}
+
+\leavevmode\vadjust pre{\hypertarget{ref-lemke2017}{}}%
+\CSLLeftMargin{{[}8{]} }
+\CSLRightInline{Lemke MK, Apostolopoulos Y, Hege A, Wideman L, Sönmez S.
+Work, sleep, and cholesterol levels of {U}.{S}. Long-haul truck drivers.
+Industrial Health 2017;55:149--61.
+doi:\href{https://doi.org/10.2486/indhealth.2016-0127}{10.2486/indhealth.2016-0127}.}
+
+\leavevmode\vadjust pre{\hypertarget{ref-ppaca2010}{}}%
+\CSLLeftMargin{{[}9{]} }
+\CSLRightInline{The {Patient Protection} and {Affordable Care Act}
+2010:119--025.}
+
+\leavevmode\vadjust pre{\hypertarget{ref-artazcoz2009}{}}%
+\CSLLeftMargin{{[}10{]} }
+\CSLRightInline{Artazcoz L, Cortès I, Escribà-Agüir V, Cascant L,
+Villegas R. Understanding the relationship of long working hours with
+health status and health-related behaviours. Journal of Epidemiology and
+Community Health (1979-) 2009;63:521--7.}
+
+\leavevmode\vadjust pre{\hypertarget{ref-kivimaki2018}{}}%
+\CSLLeftMargin{{[}11{]} }
+\CSLRightInline{Kivimäki M, Steptoe A. Effects of stress on the
+development and progression of cardiovascular disease. Nature Reviews
+Cardiology 2018;15:215--30.
+doi:\href{https://doi.org/10.1038/nrcardio.2017.189}{10.1038/nrcardio.2017.189}.}
+
+\leavevmode\vadjust pre{\hypertarget{ref-sasaki1999}{}}%
+\CSLLeftMargin{{[}12{]} }
+\CSLRightInline{Sasaki T, Iwasaki K, Oka T, Hisanaga N. Association of
+{Working Hours} with {Biological Indices Related} to the {Cardiovascular
+System} among {Engineers} in a {Machinery Manufacturing Company}.
+INDUSTRIAL HEALTH 1999;37:457--63.
+doi:\href{https://doi.org/10.2486/indhealth.37.457}{10.2486/indhealth.37.457}.}
+
+\leavevmode\vadjust pre{\hypertarget{ref-virtanen2019}{}}%
+\CSLLeftMargin{{[}13{]} }
+\CSLRightInline{Virtanen M, Magnusson Hansson L, Goldberg M, Zins M,
+Stenholm S, Vahtera J, et al. Long working hours, anthropometry, lung
+function, blood pressure and blood-based biomarkers: Cross-sectional
+findings from the {CONSTANCES} study. Journal of Epidemiology and
+Community Health 2019;73:130--5.
+doi:\href{https://doi.org/10.1136/jech-2018-210943}{10.1136/jech-2018-210943}.}
+
+\leavevmode\vadjust pre{\hypertarget{ref-kivimaki2015}{}}%
+\CSLLeftMargin{{[}14{]} }
+\CSLRightInline{Kivimäki M, Jokela M, Nyberg ST, Singh-Manoux A,
+Fransson EI, Alfredsson L, et al. Long working hours and risk of
+coronary heart disease and stroke: A systematic review and meta-analysis
+of published and unpublished data for 603 838 individuals. The Lancet
+2015;386:1739--46.
+doi:\href{https://doi.org/10.1016/S0140-6736(15)60295-1}{10.1016/S0140-6736(15)60295-1}.}
+
+\leavevmode\vadjust pre{\hypertarget{ref-reynolds2018}{}}%
+\CSLLeftMargin{{[}15{]} }
+\CSLRightInline{Reynolds AC, Bucks RS, Paterson JL, Ferguson SA, Mori
+TA, McArdle N, et al. Working (longer than) 9 to 5: Are there
+cardiometabolic health risks for young {Australian} workers who report
+longer than 38-h working weeks? International Archives of Occupational
+and Environmental Health 2018;91:403--12.
+doi:\href{https://doi.org/10.1007/s00420-018-1289-4}{10.1007/s00420-018-1289-4}.}
+
+\end{CSLReferences}
+
+
+\end{document}

@@ -1,0 +1,163 @@
+---
+title: "Table 1"
+author: "Christian Hicks"
+date: "Last compiled on `r format(Sys.time(), '%d %B %Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+pacman::p_load('tidyverse', 'tableone', 'survey', 'knitr')
+df_combined <- readRDS('./data/combined.Rds')
+
+# Factorizing variables
+df_combined$gender <- factor(df_combined$gender,
+                         levels = c(0, 1),
+                         labels = c('Female', 'Male'))
+df_combined$chol_doctor_hi <- factor(df_combined$chol_doctor_hi,
+                         levels = c(1, 2, 9),
+                         labels = c('Yes', 'No', 'Does not know'))
+df_combined$phys_work_vig <- factor(df_combined$phys_work_vig,
+                                    levels = c(1, 2, 9),
+                                    labels = c('Yes', 'No', 'Does not know'))
+df_combined$phys_rec_vig <- factor(df_combined$phys_rec_vig,
+                                   levels = c(1, 2),
+                                   labels = c('Yes', 'No'))
+df_combined$race_eth <- factor(df_combined$race_eth,
+                               levels = c(1, 2, 3, 4, 6, 7),
+                               labels = c('Mexican American',
+                                          'Other Hispanic',
+                                          'Non-Hispanic White',
+                                          'Non-Hispanic Black',
+                                          'Non-Hispanic Asian',
+                                          'Other Race or Multi-Racial'))
+df_combined$education <- factor(df_combined$education,
+                                levels = c(1, 2, 3, 4, 5, 7, 9),
+                                labels = c('Less than 9th grade',
+                                           '9-11th grade, no diploma',
+                                           'High school or GED',
+                                           'Some college or AA degree',
+                                           'College graduate or above',
+                                           'Refused',
+                                           'Does not know'))
+```
+
+```{r vars, include=FALSE}
+tab_vars <- c('bld_tc', 'wrk_hrs', 'age', 'bmi', 'gender', 'chol_doctor_hi', 
+              'sitting_min_daily', 'phys_work_vig', 'phys_rec_vig', 'race_eth', 
+              'education',
+              'income_pov_ratio')
+cat_vars <- c('gender', 'chol_doctor_hi', 'phys_work_vig', 'phys_rec_vig', 
+              'race_eth', 'education')
+non_vars <- c('wrk_hrs', 'age', 'bmi', 'income_pov_ratio', 'sitting_min_daily')
+```
+
+## Unweighted data
+```{r tables, include=FALSE}
+# Combined table
+table_unweighted <- CreateTableOne(vars = tab_vars,
+                       data = df_combined,
+                       factorVars = cat_vars)
+# Combined with medians for non-normal distributions
+table_unweighted_nonm <- print(table_unweighted,
+                             nonnormal = non_vars,
+                             showAllLevels = TRUE,
+                             minMax = T)
+
+# Stratified table
+table_unweighted_strata <- CreateTableOne(vars = tab_vars,
+                       data = df_combined,
+                       factorVars = cat_vars,
+                       strata = 'gender')
+# Stratified with medians for non-normal distributions
+table_unweighted_strata_nonm <- print(table_unweighted_strata,
+                                      nonnormal = non_vars,
+                                      showAllLevels = TRUE,
+                                      minMax = T)
+```
+
+### Combined Table 1
+```{r kable, echo=FALSE}
+kableone(table_unweighted_nonm)
+```
+
+### Stratified by gender
+```{r kable2, echo=FALSE}
+kableone(table_unweighted_strata_nonm)
+```
+
+## Weighted data
+```{r w_tables, include=FALSE}
+# Standard table
+svy1 <- svydesign(ids = df_combined$SEQN,
+                  weights = df_combined$weight_mec,
+                  data = df_combined)
+table_weighted <- svyCreateTableOne(vars = tab_vars,
+                          data = svy1,
+                          factorVars = cat_vars)
+# Combined with medians for non-normal distributions
+table_weighted_nonm <- print(table_weighted,
+                             nonnormal = non_vars,
+                             showAllLevels = TRUE,
+                             minMax = T)
+
+# Stratified table
+table_weighted_strata <- svyCreateTableOne(vars = tab_vars,
+                          data = svy1,
+                          factorVars = cat_vars,
+                          strata = 'gender')
+# Stratified with medians for non-normal distributions
+table_weighted_strata_nonm <- print(table_weighted_strata,
+                                    nonnormal = non_vars,
+                                    showAllLevels = TRUE,
+                                    minMax = T)
+```
+
+### Combined Table 1
+```{r w_kable, echo=FALSE}
+kableone(table_weighted_nonm)
+```
+
+### Standard errors
+```{r se_table, echo=FALSE}
+tbl_SE <- svymean(~wrk_hrs +
+                    bld_tc +
+                    age +
+                    bmi +
+                    gender +
+                    chol_doctor_hi +
+                    sitting_min_daily +
+                    phys_work_vig +
+                    phys_rec_vig +
+                    race_eth +
+                    education,
+                  svy1,
+                  na.rm = T) %>% 
+  round(3)
+tbl_SE %>% kable()
+bmi_wt <- subset(df_combined, !is.na(df_combined[, 21]))
+bmi_nm <- sum(bmi_wt$weight_mec)
+sit_wt <- subset(df_combined, !is.na(df_combined[, 13]))
+sit_nm <- sum(sit_wt$weight_mec)
+edu_wt <- subset(df_combined, !is.na(df_combined[, 17]))
+edu_nm <- sum(edu_wt$weight_mec)
+pov_wt <- subset(df_combined, !is.na(df_combined[, 20]))
+pov_nm <- sum(pov_wt$weight_mec)
+```
+
+### Missing weights
+BMI: `r format(bmi_nm, scientific = F, nsmall = 1)`
+
+Sitting minutes: `r format(sit_nm, scientific = F, nsmall = 1)`
+
+Education: `r format(edu_nm, scientific = F, nsmall = 1)`
+
+Poverty ratio: `r format(pov_nm, scientific = F, nsmall = 1)`
+
+### Stratified by gender
+```{r w_kable2, echo=FALSE}
+kableone(table_weighted_strata_nonm)
+```

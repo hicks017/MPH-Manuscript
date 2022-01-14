@@ -1,0 +1,305 @@
+---
+title: "Exploratory Statistics (weighted)"
+author: "Christian Hicks"
+date: "Last compiled on `r format(Sys.time(), '%d %B %Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+pacman::p_load('knitr', 'broom', 'Hmisc', 'survey', 'tidyverse')
+knitr::opts_chunk$set(echo = TRUE)
+df_combined <- readRDS('./data/combined.Rds')
+df_male <- readRDS('./data/male.Rds')
+df_female <- readRDS('./data/female.Rds')
+svy1 <- svydesign(ids = df_combined$SEQN,
+                  weights = df_combined$weight_mec,
+                  data = df_combined)
+```
+
+## Main study
+### Blood Cholesterol
+```{r chol, echo=FALSE}
+# Histogram
+ggplot(df_combined,
+       aes(x = bld_tc, weight = weight_mec)) +
+    geom_histogram(aes(y = ..density..),
+                   color = 'black',
+                   binwidth = 7.5,
+                   fill = 'grey') +
+    stat_density(geom = 'line', aes(color = 'kernal')) +
+    stat_function(fun = dnorm,
+                  args = list(mean = wtd.mean(df_combined$bld_tc,
+                                              df_combined$weight_mec),
+                              sd = sqrt(wtd.var(df_combined$bld_tc,
+                                                df_combined$weight_mec))),
+                  aes(color = 'normal')) +
+    geom_vline(aes(xintercept = svymean(~bld_tc, svy1)[1], color = 'mean'),
+               size = 1,
+               linetype = 'dashed') +
+    geom_vline(aes(xintercept = as.numeric(svyquantile(~bld_tc,
+                                                       svy1,
+                                                       0.5,
+                                                       ci = F)[1]),
+                   color = 'median'),
+               size = 1,
+               linetype = 'dashed') +
+    scale_color_manual(name = '',
+                       values = c(kernal = 'purple',
+                                  normal = 'black',
+                                  mean = 'red',
+                                  median = 'blue')) +
+    ggtitle('Blood Cholesterol distribution') +
+    theme(legend.position = 'bottom', legend.direction = 'horizontal') +
+    scale_y_continuous(sec.axis = sec_axis(trans = ~.*106745272)) +
+    xlab('total cholesterol (mg/dL)')
+```
+
+### Working hours
+```{r work, echo=FALSE}
+# Histogram
+ggplot(df_combined, aes(x = wrk_hrs, weight = weight_mec)) +
+  geom_histogram(color = 'black', binwidth = 5, fill = 'grey') +
+  ggtitle('Working Hours distribution, weighted study population') +
+  theme(legend.position = 'bottom', legend.direction = 'horizontal') +
+    geom_vline(aes(xintercept = svymean(~wrk_hrs, svy1), color = 'mean'),
+               size = 1,
+               linetype = 'dashed') +
+  geom_vline(aes(xintercept = as.numeric(svyquantile(~wrk_hrs,
+                                                     svy1,
+                                                     0.5,
+                                                     ci = F)),
+                 color = 'median'),
+             size = 1,
+             linetype = 'dashed') +
+  scale_color_manual(name = 'statistics',
+                     values = c(median = 'blue',mean = 'red')) +
+  xlab('prior week working hours')
+```
+
+## Demographics
+### Age
+```{r age, echo=FALSE}
+# Histogram
+ggplot(df_combined, aes(x = age, weight = weight_mec)) +
+  geom_histogram(aes(y = ..density..),
+                 color = 'black',
+                 binwidth = 2,
+                 fill = 'grey') +
+  stat_density(geom = 'line', aes(color = 'kernal')) +
+  stat_function(fun = dnorm,
+                args = list(mean = wtd.mean(df_combined$age,
+                                            df_combined$weight_mec),
+                            sd = sqrt(wtd.var(df_combined$age,
+                                              df_combined$weight_mec))),
+                aes(color = 'normal')) +
+  geom_vline(aes(xintercept = svymean(~age, svy1)[1], color = 'mean'),
+             size = 1,
+             linetype = 'dashed') +
+    geom_vline(aes(xintercept = as.numeric(svyquantile(~age,
+                                                       svy1,
+                                                       0.5,
+                                                       ci = F)[1]),
+                   color = 'median'),
+               size = 1,
+               linetype = 'dashed') +
+  scale_color_manual(name = '',
+                     values = c(kernal = 'purple',
+                                normal = 'black',
+                                mean = 'red',
+                                median = 'blue')) +
+  ggtitle('Age distribution, weighted study population') +
+  theme(legend.position = 'bottom', legend.direction = 'horizontal') +
+  scale_y_continuous(sec.axis = sec_axis(trans = ~.*106745272, name = 'count'))
+```
+
+### BMI
+```{r bmi, echo=FALSE}
+# Histogram
+ggplot(df_combined, aes(x = bmi, weight = weight_mec)) +
+  geom_histogram(aes(y = ..density..),
+                 color = 'black',
+                 binwidth = 2,
+                 fill = 'grey') +
+  stat_density(geom = 'line', aes(color = 'kernal')) +
+  stat_function(fun = dnorm,
+                args = list(mean = wtd.mean(df_combined$bmi,
+                                            df_combined$weight_mec),
+                            sd = sqrt(wtd.var(df_combined$bmi,
+                                              df_combined$weight_mec))),
+                aes(color = 'normal')) +
+  geom_vline(aes(xintercept = svymean(~bmi, svy1)[1], color = 'mean'),
+             size = 1,
+             linetype = 'dashed') +
+    geom_vline(aes(xintercept = as.numeric(svyquantile(~bmi,
+                                                       svy1,
+                                                       0.5,
+                                                       ci = F)[1]),
+                   color = 'median'),
+               size = 1,
+               linetype = 'dashed') +
+  scale_color_manual(name = '',
+                     values = c(kernal = 'purple',
+                                normal = 'black',
+                                mean = 'red',
+                                median = 'blue')) +
+  ggtitle('BMI distribution, weighted study population') +
+  theme(legend.position = 'bottom', legend.direction = 'horizontal') +
+  scale_y_continuous(sec.axis = sec_axis(trans = ~.*106745272, name = 'count'))
+```
+
+### Gender
+```{r gender, echo=FALSE}
+# Bar graph
+ggplot(df_combined, aes(x = as.factor(gender), weight =weight_mec)) +
+  geom_bar(color = 'black', fill = 'grey') +
+  geom_text(aes(label = scales::percent((..count..)/sum(..count..))),
+            stat = 'count',
+            color = 'black',
+            vjust = -0.5) +
+  scale_x_discrete(labels = c('female', 'male')) +
+  theme(axis.title.x = element_blank()) +
+  labs(title = 'Gender')
+```
+
+### Race/Ethnicity
+```{r race, echo=FALSE}
+# Bar graph
+ggplot(df_combined, aes(x = as.factor(race_eth), weight =weight_mec)) +
+  geom_bar(color = 'black', fill = 'grey') +
+  geom_text(aes(label = scales::percent((..count..)/sum(..count..))),
+            stat = 'count',
+            color = 'black',
+            vjust = -0.5) +
+  scale_x_discrete(labels = c('Hispanic',
+                              'White',
+                              'Black',
+                              'Asian',
+                              'Other')) +
+  theme(axis.title.x = element_blank()) +
+  labs(title = 'Race/Ethnicity')
+```
+
+### Education
+```{r education, echo=FALSE}
+# Bar graph
+ggplot(subset(df_combined, !is.na(education)),
+       aes(x = as.factor(education), weight =weight_mec)) +
+  geom_bar(color = 'black', fill = 'grey') +
+  geom_text(aes(label = scales::percent((..count..)/sum(..count..))),
+            stat = 'count',
+            color = 'black',
+            vjust = -0.5) +
+  scale_x_discrete(labels = c('No diploma',
+                              'H.S./GED',
+                              'Some college',
+                              'College')) +
+  theme(axis.title.x = element_blank()) +
+  labs(title = 'Education')
+```
+
+### Poverty
+```{r poverty, echo=FALSE}
+# Histogram
+ggplot(df_combined, aes(x = income_pov_ratio, weight = weight_mec)) +
+  geom_histogram(binwidth = 0.5, na.rm = T, fill = 'grey', color = 'black') +
+  labs(x = 'ratio',
+       title = 'Income to Poverty Ratio, weighted study population') +
+  geom_vline(aes(xintercept = svymean(~income_pov_ratio, svy1, na.rm = T),
+                 color = 'mean'),
+             size = 1,
+             linetype = 'dashed') +
+  geom_vline(aes(xintercept = as.numeric(svyquantile(~income_pov_ratio,
+                                                     svy1, 0.5,
+                                                     ci = F,
+                                                     na.rm = T)[1]),
+                 color = 'median'),
+             size = 1,
+             linetype = 'dashed') +
+  scale_color_manual(name = 'statistics',
+                     values = c(median = 'blue', mean = 'red'))
+```
+
+Poverty is based on family size, income, and location. A value of `1` represents the poverty threshold. Ratios over `5` are categorized as `5` to preserve anonymity.
+
+## Questionnaire
+### Doctor opinion
+```{r doctor_hi, echo=FALSE}
+# Bar graph
+ggplot(subset(df_combined, !is.na(chol_doctor_hi)),
+       aes(x = as.factor(chol_doctor_hi), weight =weight_mec)) +
+  geom_bar(color = 'black',
+           fill = 'grey') +
+  geom_text(aes(label = scales::percent((..count..)/sum(..count..))),
+            stat = 'count',
+            color = 'black',
+            vjust = -0.5) +
+  scale_x_discrete(labels = c('yes', 'no')) +
+  theme(axis.title.x = element_blank()) +
+  labs(title = 'Doctor says cholesterol is high, weighted')
+
+```
+
+### Sitting minutes
+```{r sit, echo=FALSE}
+# Histogram
+ggplot(df_combined,
+       aes(x = sitting_min_daily, weight = weight_mec)) +
+  geom_histogram(binwidth = 65,
+                 na.rm = T,
+                 color = 'black',
+                 fill = 'grey') +
+  labs(title = 'Daily sitting minutes, weighted population',
+       x = 'minutes',
+       y = 'count') +
+  geom_vline(
+    aes(xintercept = svymean(~sitting_min_daily, svy1, na.rm = T),
+        color = 'mean'),
+    size = 1,
+    linetype = 'dashed') +
+  geom_vline(
+    aes(xintercept = as.numeric(svyquantile(~sitting_min_daily,
+                                            svy1, 0.5,
+                                            ci = F,
+                                            na.rm = T)[1]),
+        color = 'median'),
+    size = 1,
+    linetype = 'dashed') +
+  scale_color_manual(name = 'statistics',
+                     values = c(median = 'blue', mean = 'red'))
+
+```
+
+### Vigorous activity at work
+```{r phys_work, echo=FALSE}
+# Bar graph
+ggplot(subset(df_combined, !is.na(phys_work_vig)),
+       aes(x = as.factor(phys_work_vig), weight =weight_mec)) +
+  geom_bar(color = 'black',
+           fill = 'grey') +
+  geom_text(aes(label = scales::percent((..count..)/sum(..count..))),
+            stat = 'count',
+            color = 'black',
+            vjust = -0.5) +
+  scale_x_discrete(labels = c('yes', 'no')) +
+  theme(axis.title.x = element_blank()) +
+  labs(title = 'Vigorous work activity')
+```
+
+### Vigorous recreational activity
+```{r phys_rec, echo=FALSE}
+# Bar graph
+ggplot(df_combined,
+       aes(x = as.factor(phys_rec_vig), weight =weight_mec)) +
+  geom_bar(color = 'black',
+           fill = 'grey') +
+  geom_text(aes(label = scales::percent((..count..)/sum(..count..))),
+            stat = 'count',
+            color = 'black',
+            vjust = -0.5) +
+  scale_x_discrete(labels = c('yes', 'no')) +
+  theme(axis.title.x = element_blank()) +
+  labs(title = 'Vigorous recreational activity')
+```

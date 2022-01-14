@@ -1,0 +1,1119 @@
+<!DOCTYPE html><html xml:lang="en" lang="en" xmlns="http://www.w3c.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>OCQ_J</title>
+    <meta name="title" content="NHANES 2017-2018: Occupation Data Documentation, Codebook, and Frequencies" />
+    <style type="text/css">
+					.nhanes-doc { font: 75% Verdana, Arial, Helvetica, sans-serif; }
+
+					.nhanes-doc h1 {
+					color: #0c5205;
+					font-family: "Trebuchet MS", Arial, sans-serif;
+					font-size: 2em;
+					font-weight: normal;
+					margin-bottom: 10px;
+					margin-top: 0;
+					}
+
+					.nhanes-doc h2 {
+					color: #0c5205;
+					font-family: "Trebuchet MS", Arial, sans-serif;
+					font-size: 1.6em;
+					font-weight: normal;
+					}
+
+					.nhanes-doc h3 {
+					color: #000;
+					font-family: "Trebuchet MS", Arial, sans-serif;
+					font-size: 1.5em;
+					font-weight: normal;
+					}
+
+					.nhanes-doc h3.vartitle {
+					background-color: #c1d5b0;
+					padding: 6px 12px;
+					}
+
+					.nhanes-doc h4 {
+					color: #000;
+					font-family: "Trebuchet MS", Arial, sans-serif;
+					font-size: 1.3em;
+					font-weight: bold;
+					}
+
+					.nhanes-doc h5 {
+					color: #000;
+					font-family: Verdana, Arial, Helvetica, sans-serif;
+					font-size: 1em;
+					font-weight: bold;
+					}
+
+					.nhanes-doc h5.specialnote {
+					color: #000;
+					font-family: Verdana, Arial, Helvetica, sans-serif;
+					font-size: 1.2em;
+					font-style: italic;
+					font-weight: bold;
+					}
+
+					.nhanes-doc a {
+					color: #039;
+					text-decoration: none;
+					}
+
+					.nhanes-doc p {
+					font-family: Verdana, Arial, Helvetica, sans-serif;
+					font-size: 1em;
+					line-height: 1.33em;
+					margin: 0 3em 1em;
+					padding: 0;
+					text-align: left;
+					}
+
+					.nhanes-doc ul {
+					list-style-type: disc;
+					margin: 0 3em 1em;
+					padding: 0;
+					}
+
+					.nhanes-doc ol {
+					list-style-type: decimal;
+					margin: 0;
+					overflow: hidden;
+					padding: 0;
+					padding-left: 2em;
+					}
+
+					.nhanes-doc li {
+					margin-left: 1.5em;
+					margin-top: 0.7em;
+					}
+
+					.nhanes-doc table {
+					border: #000 1px solid;
+					border-collapse: collapse;
+					margin: 0 auto 1em;
+					max-width: 600px;
+					padding: 2px;
+					page-break-inside: avoid;
+					table-layout: auto;
+					}
+
+					.nhanes-doc th {
+					background: #f4f4e1;
+					border: #000 1px solid;
+					font-family: Verdana, Arial, Helvetica, sans-serif;
+					padding: 5px;
+					text-align: center;
+					vertical-align: top;
+					}
+
+					.nhanes-doc th.rowheader {
+					background: #f4f4e1;
+					border: #000 1px solid;
+					font-family: Verdana, Arial, Helvetica, sans-serif;
+					padding: 5px;
+					text-align: center;
+					vertical-align: top;
+					}
+
+					.nhanes-doc td {
+					border: #000 1px solid;
+					font-family: Verdana, Arial, Helvetica, sans-serif;
+					padding: 5px;
+					text-align: left;
+					vertical-align: top;
+					}
+
+					.nhanes-doc td.values2 {
+					text-align: RIGHT;
+					vertical-align: top;
+					}
+
+					.nhanes-doc table caption {
+					font-weight: bold;
+					padding-bottom: 0.5em;
+					}
+
+					.nhanes-doc div#wrapper { width: 650px; }
+
+					.nhanes-doc div#toc {
+					border: solid 1px #CCC;
+					float: left;
+					height: 95%;
+					left: 750px;
+					overflow: hidden;
+					position: fixed;
+					top: 10px;
+					width: 400px;
+					z-index: 10;
+					}
+
+					.nhanes-doc div#toc h3 {
+					background-color: #f4f4e1;
+					border-bottom: solid 1px #ccc;
+					letter-spacing: 8px;
+					margin: 0;
+					padding: 8px;
+					text-align: center;
+					text-transform: uppercase;
+					}
+
+					.nhanes-doc div#toc-scroll {
+					height: calc(100% - 1.5em);
+					overflow: scroll;
+					width: 100%;
+					}
+
+					.nhanes-doc div#toc li {
+					margin-left: -0.5em;
+					margin-right: -0.5em;
+					}
+
+					.nhanes-doc div#PageHeader {
+					border-bottom: thin solid #999;
+					margin-bottom: 12px;
+					width: 650px;
+					}
+
+					.nhanes-doc div#Sections { width: 650px; }
+
+					.nhanes-doc div#Codebook { width: 650px; }
+
+					.nhanes-doc div#Codebook dl {
+					margin: 2em 0 10px 40px;
+					padding: 0;
+					width: 600px;
+					display: table;
+					}
+
+					.nhanes-doc div#Codebook dt {
+					float: left;
+					font-weight: bold;
+					margin: 0;
+					padding: 0.5em;
+					width: 150px;
+					display: table-cell;
+					}
+
+					.nhanes-doc div#Codebook dd {
+					float: left;
+					margin: 0;
+					padding: 0.5em;
+					width: 420px;
+					display: table-cell;
+					}
+
+					.nhanes-doc div#References {
+					page-break-after: always;
+					width: 650px;
+					}
+
+					.nhanes-doc div#Appendix {
+					page-break-after: always;
+					width: 650px;
+					}
+
+					.nhanes-doc table.values {
+					border: 2px;
+					left: 20px;
+					margin-bottom: 20px;
+					page-break-inside: avoid;
+					position: relative;
+					width: 600px;
+					}
+
+					.nhanes-doc span.file-size { color: gray; }
+
+					.nhanes-doc .pagebreak {
+					background-color: transparent;
+					display: block;
+					page-break-after: always;
+					page-break-inside: avoid;
+					}
+				</style>
+    <style type="text/css" media="print">
+					.nhanes-doc div#toc { display: none; }
+				</style>
+  </head>
+  <body class="nhanes-doc">
+    <div id="toc">
+      <h3>Table of Contents</h3>
+      <div id="toc-scroll">
+        <ul>
+          <li>
+            <a href="#Component_Description">Component Description</a>
+          </li>
+          <li>
+            <a href="#Eligible_Sample">Eligible Sample</a>
+          </li>
+          <li>
+            <a href="#Interview_Setting_and_Mode_of_Administration">Interview Setting and Mode of Administration</a>
+          </li>
+          <li>
+            <a href="#Quality_Assurance_&amp;_Quality_Control">Quality Assurance &amp; Quality Control</a>
+          </li>
+          <li>
+            <a href="#Data_Processing_and_Editing">Data Processing and Editing</a>
+          </li>
+          <li>
+            <a href="#Analytic_Notes">Analytic Notes</a>
+          </li>
+          <li>
+            <a href="#Codebook">Codebook</a>
+            <ul id="CodebookLinks">
+              <li>
+                <a href="#SEQN">SEQN - Respondent sequence number</a>
+              </li>
+              <li>
+                <a href="#OCD150">OCD150 - Type of work done last week</a>
+              </li>
+              <li>
+                <a href="#OCQ180">OCQ180 - Hours worked last week at all jobs</a>
+              </li>
+              <li>
+                <a href="#OCQ210">OCQ210 - Usually work 35 or more hours per week</a>
+              </li>
+              <li>
+                <a href="#OCQ260">OCQ260 - Description of job/work situation</a>
+              </li>
+              <li>
+                <a href="#OCD270">OCD270 - Number of months working in the main job</a>
+              </li>
+              <li>
+                <a href="#OCQ670">OCQ670 - Overall work schedule past 3 months</a>
+              </li>
+              <li>
+                <a href="#OCQ380">OCQ380 - Main reason did not work last week</a>
+              </li>
+              <li>
+                <a href="#OCD390G">OCD390G - Kind of work you have done the longest</a>
+              </li>
+              <li>
+                <a href="#OCD395">OCD395 - Duration of longest job (months)</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div id="wrapper">
+      <div id="PageHeader">
+        <h1>National Health and Nutrition Examination Survey</h1>
+        <h2>2017-2018 Data Documentation, Codebook, and Frequencies</h2>
+        <h3>Occupation (OCQ_J)</h3>
+        <h4> Data File: OCQ_J.xpt</h4>
+        <h5 class="left">First Published: February 2020</h5>
+        <h5 class="right">Last Revised: NA</h5>
+      </div>
+      <div id="Sections">
+        <h2 id="Component_Description">Component Description</h2><p>The Occupation Questionnaire (variable name prefix OCQ) section (questions OCD150 to OCQ670), which is part of the household interview, contains survey participant interview data on employment and variables relating to the work environment. </p>
+<p><span style="text-decoration: underline;">OCQ section Topics:</span></p>
+<ul>
+    <li>Data for survey participant&rsquo;s current job (OCQ180-OCD270): weekly hours worked, public vs. private sector, and duration of employment;</li>
+    <li>Data for survey participant&rsquo;s work schedule during the past three months (OCQ670); and</li>
+    <li>Data for the survey participant&rsquo;s longest job (OCD390G and OCD395): kind of work done longest and duration of longest job.</li>
+</ul><h2 id="Eligible_Sample">Eligible Sample</h2><p>The OCQ was administered to a full sample of survey participants aged 16 years and older.</p><h2 id="Interview_Setting_and_Mode_of_Administration">Interview Setting and Mode of Administration</h2><p>These questions were asked, in the home, during the household interview, by trained interviewers using the Computer-Assisted Personal Interview (CAPI) system. Persons 16 years of age were interviewed directly.</p><h2 id="Quality_Assurance_&amp;_Quality_Control">Quality Assurance &amp; Quality Control</h2><p>The CAPI system is programmed with built-in consistency checks to reduce data entry errors. CAPI also uses online help screens to assist interviewers in defining key terms used in the questionnaire. During the 2017-2018 data collection cycle, periodic QC checks were performed on the OCQ data being collected; and interviewer-specific feedback and retraining was performed as appropriate.</p><h2 id="Data_Processing_and_Editing">Data Processing and Editing</h2><p>Questionnaire interview responses were entered into a tablet and then uploaded into a computerized database in the same manner as other sections of the Survey Participant Questionnaire. The data were then edited for completeness, consistency, and illogical values. </p>
+<p>To decrease the risk of disclosure, additional &ldquo;bottom&rdquo; and &ldquo;top&rdquo; summary codes were implemented for three variables in 2017-2018:</p>
+<ul>
+    <li>OCQ180 (hours worked last week): Range of values: 5-80+ hours;</li>
+    <li>OCD270 (Number of months working in the main job): Range of values: 0-480+ months; and</li>
+    <li>OCD395 (Duration of longest job): Range of values: 5-600+ months.</li>
+</ul><h2 id="Analytic_Notes">Analytic Notes</h2><p>In general, analysts are advised to review carefully the question wording in the OCQ codebook to make sure they understand question skip patterns and the definitions employed for occupation-related variables. Some OCQ questions need to be considered as an integral part of data collection for other questionnaire sections, and exam or laboratory components. </p>
+<p>Please note that military occupations are not permissible entries for NHANES current job data because for NHANES, only the civilian, non-institutionalized population is eligible to participate in the survey. However, civilian employees of the armed forces are included in the NHANES sample and military occupations are valid entries for the survey participant&rsquo;s longest job data. </p>
+<p><span style="text-decoration: underline;">Current Job Information: </span></p>
+<p>The primary focus of the OCQ is data collection for the participant&rsquo;s work within the previous week (i.e., the participant&rsquo;s Current Job). The participant&rsquo;s Current Job is defined as the main paid job worked within the last week, including work on a family farm. When an individual currently worked multiple jobs, the participant was asked to designate one main job for the interview. Data collected included: </p>
+<ul>
+    <li>The number of hours worked last week; </li>
+    <li>Whether the participant usually works 35 or more hours/week; </li>
+    <li>Sector of employment (private, public); </li>
+    <li>Number of months worked on the current, main job; and
+    </li>
+    <li>The main reason the participant did not work last week (if not currently working).
+    </li>
+</ul>
+<p><span style="text-decoration: underline;">Longest Job Information: </span></p>
+<ul>
+    <li>Kind of work done longest; and
+    </li>
+    <li>Duration of longest held job.
+    <br />
+    </li>
+</ul>
+<p><span style="text-decoration: underline;">Related NHANES 2017-18 Data: </span></p>
+<p>There are occupation-related items in the NHANES Physical Functioning Questionnaire (PFQ) (PFQ049 and PFQ051) and two questions on veteran's status/military service in the Survey Participant Demographics (DEMO) data file (DMQMILIZ and DMQADFC).
+</p>
+<p>The OCQ data were collected as part of the household questionnaire and, therefore, the full sample NHANES interview weights WTINT2YR should be used for statistical analysis. However, if the OCQ data are merged with the MEC exam or laboratory data, then the NHANES examination sample weights WTMEC2YR should be used for analyses. </p>
+<p>Please refer to the <a href="https://wwwn.cdc.gov/nchs/nhanes/analyticguidelines.aspx" target="_blank">NHANES Analytic Guidelines</a> and the on-line <a href="https://wwwn.cdc.gov/nchs/nhanes/tutorials/default.aspx" target="_blank">NHANES Tutorial</a> for further details on the use of sample weights and other analytic issues.</p>
+<p style="margin: 0in 0.5in 12pt 0in;"><span style="font-family: Calibri;"></span></p></div>
+      <div id="Codebook">
+        <h2>Codebook and Frequencies</h2>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="SEQN">SEQN - Respondent sequence number</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">SEQN</dd>
+            <dt>SAS Label: </dt>
+            <dd>Respondent sequence number</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Respondent sequence number</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 16 YEARS -
+			150 YEARS</dd>
+          </dl>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="OCD150">OCD150 - Type of work done last week</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">OCD150</dd>
+            <dt>SAS Label: </dt>
+            <dd>Type of work done last week</dd>
+            <dt>English Text: </dt>
+            <dd class="info">(SP Interview Version) In this part of the survey I will ask you questions about {your/SP's} work experience. Which of the following {were you/was SP} doing last week . . . (Family Interview Version) The next questions are about {your/NON-SP HEAD'S/NON- SP SPOUSE'S} current job or business.  Which of the following {were you/was} {NON-SP HEAD/NON-SP SPOUSE} doing last week . . .</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 16 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">Working at a job or business,</td>
+                <td class="values" align="right">3141</td>
+                <td class="values" align="right">3141</td>
+                <td class="values">OCQ180</td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">With a job or business but not at work,</td>
+                <td class="values" align="right">122</td>
+                <td class="values" align="right">3263</td>
+                <td class="values">OCQ210</td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">3</td>
+                <td class="values">Looking for work, or</td>
+                <td class="values" align="right">271</td>
+                <td class="values" align="right">3534</td>
+                <td class="values">OCD390G</td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">4</td>
+                <td class="values">Not working at a job or business?</td>
+                <td class="values" align="right">2625</td>
+                <td class="values" align="right">6159</td>
+                <td class="values">OCQ380</td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">6159</td>
+                <td class="values">OCD390G</td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">2</td>
+                <td class="values" align="right">6161</td>
+                <td class="values">OCD390G</td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">6161</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="OCQ180">OCQ180 - Hours worked last week at all jobs</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">OCQ180</dd>
+            <dt>SAS Label: </dt>
+            <dd>Hours worked last week at all jobs</dd>
+            <dt>English Text: </dt>
+            <dd class="info">How many hours did {you/SP} work last week at all jobs or businesses?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">ENTER NUMBER OF HOURS</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 16 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">6 to 78</td>
+                <td class="values">Range of Values</td>
+                <td class="values" align="right">3039</td>
+                <td class="values" align="right">3039</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">5</td>
+                <td class="values">1-5 Hours</td>
+                <td class="values" align="right">49</td>
+                <td class="values" align="right">3088</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">80</td>
+                <td class="values">80 Hours or more</td>
+                <td class="values" align="right">49</td>
+                <td class="values" align="right">3137</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">77777</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">1</td>
+                <td class="values" align="right">3138</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">99999</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">3</td>
+                <td class="values" align="right">3141</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">3020</td>
+                <td class="values" align="right">6161</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="OCQ210">OCQ210 - Usually work 35 or more hours per week</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">OCQ210</dd>
+            <dt>SAS Label: </dt>
+            <dd>Usually work 35 or more hours per week</dd>
+            <dt>English Text: </dt>
+            <dd class="info">{Do you/Does SP} usually work 35 hours or more per week in total at all jobs or businesses?</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 16 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">Yes</td>
+                <td class="values" align="right">367</td>
+                <td class="values" align="right">367</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">No</td>
+                <td class="values" align="right">645</td>
+                <td class="values" align="right">1012</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">1012</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">2</td>
+                <td class="values" align="right">1014</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">5147</td>
+                <td class="values" align="right">6161</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="OCQ260">OCQ260 - Description of job/work situation</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">OCQ260</dd>
+            <dt>SAS Label: </dt>
+            <dd>Description of job/work situation</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Looking at the card, which of these best describes this job or work situation?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">(SP Interview Version) ASK IF NOT CLEAR. HAND CARD OCQ1. 
+
+(Family Interview Version) ASK IF NOT CLEAR:   HAND CARD DMQ1</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 16 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">An employee of a private company, business, or individual for wages, salary, or commission.</td>
+                <td class="values" align="right">2376</td>
+                <td class="values" align="right">2376</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">A federal government employee</td>
+                <td class="values" align="right">93</td>
+                <td class="values" align="right">2469</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">3</td>
+                <td class="values">A state government employee</td>
+                <td class="values" align="right">196</td>
+                <td class="values" align="right">2665</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">4</td>
+                <td class="values">A local government employee</td>
+                <td class="values" align="right">190</td>
+                <td class="values" align="right">2855</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">5</td>
+                <td class="values">Self-employed in own business, professional practice or farm.</td>
+                <td class="values" align="right">346</td>
+                <td class="values" align="right">3201</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">6</td>
+                <td class="values">Working without pay in family business or farm</td>
+                <td class="values" align="right">25</td>
+                <td class="values" align="right">3226</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">77</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">6</td>
+                <td class="values" align="right">3232</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">99</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">31</td>
+                <td class="values" align="right">3263</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">2898</td>
+                <td class="values" align="right">6161</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="OCD270">OCD270 - Number of months working in the main job</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">OCD270</dd>
+            <dt>SAS Label: </dt>
+            <dd>Number of months working in the main job</dd>
+            <dt>English Text: </dt>
+            <dd class="info">About how long {have you/has SP} worked for {EMPLOYER} as a(n) {OCCUPATION}?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">NUMBER OF MONTHS.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 16 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1 to 468</td>
+                <td class="values">Range of Values</td>
+                <td class="values" align="right">3116</td>
+                <td class="values" align="right">3116</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">0</td>
+                <td class="values">Less than 1 month</td>
+                <td class="values" align="right">98</td>
+                <td class="values" align="right">3214</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">480</td>
+                <td class="values">480 Months or more</td>
+                <td class="values" align="right">38</td>
+                <td class="values" align="right">3252</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">77777</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">7</td>
+                <td class="values" align="right">3259</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">99999</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">4</td>
+                <td class="values" align="right">3263</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">2898</td>
+                <td class="values" align="right">6161</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="OCQ670">OCQ670 - Overall work schedule past 3 months</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">OCQ670</dd>
+            <dt>SAS Label: </dt>
+            <dd>Overall work schedule past 3 months</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Which of the following best describes your overall work schedule (include all jobs) for the last three months?</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 16 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">Traditional 9 AM to 5 PM day</td>
+                <td class="values" align="right">1168</td>
+                <td class="values" align="right">1168</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">Evening or nights</td>
+                <td class="values" align="right">423</td>
+                <td class="values" align="right">1591</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">3</td>
+                <td class="values">Early mornings</td>
+                <td class="values" align="right">483</td>
+                <td class="values" align="right">2074</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">5</td>
+                <td class="values">Variable (early mornings, days, and nights)</td>
+                <td class="values" align="right">1185</td>
+                <td class="values" align="right">3259</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">2</td>
+                <td class="values" align="right">3261</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">1</td>
+                <td class="values" align="right">3262</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">2899</td>
+                <td class="values" align="right">6161</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="OCQ380">OCQ380 - Main reason did not work last week</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">OCQ380</dd>
+            <dt>SAS Label: </dt>
+            <dd>Main reason did not work last week</dd>
+            <dt>English Text: </dt>
+            <dd class="info">(SP Interview Version) What is the main reason {you/SP} did not work last week?
+
+(Family Interview Version) What is the main reason {you/NON-SP HEAD/NON-SP SPOUSE} did not work last week?</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 16 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">Taking care of house or family</td>
+                <td class="values" align="right">324</td>
+                <td class="values" align="right">324</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">Going to school</td>
+                <td class="values" align="right">294</td>
+                <td class="values" align="right">618</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">3</td>
+                <td class="values">Retired</td>
+                <td class="values" align="right">1189</td>
+                <td class="values" align="right">1807</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">4</td>
+                <td class="values">Unable to work for health reasons</td>
+                <td class="values" align="right">201</td>
+                <td class="values" align="right">2008</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">5</td>
+                <td class="values">On layoff</td>
+                <td class="values" align="right">35</td>
+                <td class="values" align="right">2043</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">6</td>
+                <td class="values">Disabled</td>
+                <td class="values" align="right">370</td>
+                <td class="values" align="right">2413</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Other</td>
+                <td class="values" align="right">211</td>
+                <td class="values" align="right">2624</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">77</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">1</td>
+                <td class="values" align="right">2625</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">99</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">2625</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">3536</td>
+                <td class="values" align="right">6161</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="OCD390G">OCD390G - Kind of work you have done the longest</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">OCD390G</dd>
+            <dt>SAS Label: </dt>
+            <dd>Kind of work you have done the longest</dd>
+            <dt>English Text: </dt>
+            <dd class="info">Thinking of all the paid jobs or businesses {you/SP} ever had, what kind of work {were you/was s/he} doing the longest?  (For example, electrical engineer, stock clerk, typist, farmer.)</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">GATE QUESTION</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 16 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">1</td>
+                <td class="values">Enter occupation</td>
+                <td class="values" align="right">3739</td>
+                <td class="values" align="right">3739</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">2</td>
+                <td class="values">Same as current occupation</td>
+                <td class="values" align="right">2015</td>
+                <td class="values" align="right">5754</td>
+                <td class="values">End of Section</td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">3</td>
+                <td class="values">Armed forces</td>
+                <td class="values" align="right">46</td>
+                <td class="values" align="right">5800</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">4</td>
+                <td class="values">Never worked</td>
+                <td class="values" align="right">354</td>
+                <td class="values" align="right">6154</td>
+                <td class="values">End of Section</td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">7</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">4</td>
+                <td class="values" align="right">6158</td>
+                <td class="values">End of Section</td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">9</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">3</td>
+                <td class="values" align="right">6161</td>
+                <td class="values">End of Section</td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">0</td>
+                <td class="values" align="right">6161</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagebreak">
+          <h3 class="vartitle" id="OCD395">OCD395 - Duration of longest job (months)</h3>
+          <dl>
+            <dt>Variable Name: </dt>
+            <dd class="info">OCD395</dd>
+            <dt>SAS Label: </dt>
+            <dd>Duration of longest job (months)</dd>
+            <dt>English Text: </dt>
+            <dd class="info">About how long did {you/SP} work at that job or business?</dd>
+            <dt class="info">English Instructions: </dt>
+            <dd class="info">NUMBER OF MONTHS.</dd>
+            <dt>Target: </dt>
+            <dd> Both males and females 16 YEARS -
+			150 YEARS</dd>
+          </dl>
+          <table class="values">
+            <thead>
+              <tr>
+                <th scope="column" class="values">Code or Value</th>
+                <th scope="column" class="values">Value Description</th>
+                <th scope="column" class="values">Count</th>
+                <th scope="column" class="values">Cumulative</th>
+                <th scope="column" class="values">Skip to Item</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row" class="values">6 to 588</td>
+                <td class="values">Range of Values</td>
+                <td class="values" align="right">3578</td>
+                <td class="values" align="right">3578</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">5</td>
+                <td class="values">0-5 Months</td>
+                <td class="values" align="right">145</td>
+                <td class="values" align="right">3723</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">600</td>
+                <td class="values">600 Months or more</td>
+                <td class="values" align="right">53</td>
+                <td class="values" align="right">3776</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">77777</td>
+                <td class="values">Refused</td>
+                <td class="values" align="right">2</td>
+                <td class="values" align="right">3778</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">99999</td>
+                <td class="values">Don't know</td>
+                <td class="values" align="right">7</td>
+                <td class="values" align="right">3785</td>
+                <td class="values">
+                </td>
+              </tr>
+              <tr>
+                <td scope="row" class="values">.</td>
+                <td class="values">Missing</td>
+                <td class="values" align="right">2376</td>
+                <td class="values" align="right">6161</td>
+                <td class="values">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

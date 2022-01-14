@@ -1,0 +1,58 @@
+---
+title: "Table 3 Analysis"
+author: "Christian Hicks"
+date: "Last compiled on `r format(Sys.time(), '%d %B %Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+pacman::p_load('MASS', 'Hmisc', 'knitr', 'broom', 'survey', 'tidyverse')
+df_combined <- readRDS('./data/combined.Rds')
+attach(df_combined)
+# Factorizing variables
+gender <- as.factor(gender)
+chol_doctor_hi <- relevel(as.factor(chol_doctor_hi), ref = 2)
+phys_work_vig <- relevel(as.factor(phys_work_vig), ref = 2)
+phys_rec_vig <- relevel(as.factor(phys_rec_vig), ref = 2)
+race_eth <- relevel(as.factor(race_eth), ref = '3')
+education <- relevel(as.factor(education), ref = '3')
+
+# Weighted data
+svy1 <- svydesign(ids = df_combined$SEQN,
+                  weights = df_combined$weight_mec,
+                  data = df_combined)
+```
+
+```{r model, echo=FALSE}
+model_full <- lm(bld_tc ~ wrk_hrs + age + bmi + sitting_min_daily +
+                   income_pov_ratio + gender + chol_doctor_hi +
+                   phys_work_vig + phys_rec_vig + race_eth + education,
+                 weights = weight_mec)
+model_fit <- lm(bld_tc ~ wrk_hrs + age + bmi + race_eth + phys_rec_vig +
+                  income_pov_ratio,
+                weights = weight_mec)
+
+# Plotting model with average values
+new_df <- with(df_combined,
+               data.frame(wrk_hrs = rep(seq(min(wrk_hrs), max(wrk_hrs), 1)),
+                          age = wtd.mean(age, weights =  weight_mec),
+                          bmi = wtd.mean(bmi, weights =  weight_mec),
+                          race_eth = as.factor(wtd.quantile(
+                            race_eth,weights =  weight_mec, probs =  0.5
+                            )),
+                          phys_rec_vig = as.factor(wtd.quantile(
+                            phys_rec_vig, weights =  weight_mec, probs =  0.5
+                            )),
+                          income_pov_ratio = wtd.mean(income_pov_ratio,
+                                                      weights = weight_mec)))
+new_df$bld_tc <- predict(model_fit, new_df)
+ggplot(df_combined, aes(x = wrk_hrs, y = bld_tc)) +
+  geom_point() +
+  geom_line(data = new_df, aes(col = 'red'))
+summary(model_fit)
+confint.lm(model_fit)
+```

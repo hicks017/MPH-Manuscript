@@ -1,0 +1,83 @@
+---
+title: "Exploratory Statistics (weighted)"
+author: "Christian Hicks"
+date: "Last compiled on `r format(Sys.time(), '%d %B %Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+pacman::p_load('knitr', 'broom', 'Hmisc', 'survey', 'tidyverse')
+knitr::read_chunk('../src/exploratory/exp_chol.R')
+knitr::read_chunk('../src/exploratory/exp_work.R')
+knitr::read_chunk('../src/exploratory/exp_age.R')
+knitr::read_chunk('../src/exploratory/exp_bmi.R')
+knitr::read_chunk('../src/exploratory/exp_gender.R')
+knitr::read_chunk('../src/exploratory/exp_race.R')
+knitr::read_chunk('../src/exploratory/exp_edu.R')
+knitr::read_chunk('../src/exploratory/exp_poverty.R')
+knitr::read_chunk('../src/exploratory/exp_doctor.R')
+knitr::read_chunk('../src/exploratory/exp_sitting.R')
+knitr::read_chunk('../src/exploratory/exp_phys_work.R')
+knitr::read_chunk('../src/exploratory/exp_phys_rec.R')
+knitr::opts_chunk$set(echo = TRUE)
+df_combined <- readRDS('./data/combined.Rds')
+svy1 <- svydesign(ids = df_combined$SEQN,
+                  weights = df_combined$weight_mec,
+                  data = df_combined)
+```
+
+## Main study
+### Blood Cholesterol
+```{r chol_plot, echo=FALSE}
+```
+
+### Working hours
+```{r work_plot, echo=FALSE}
+```
+
+## Demographics
+### Age
+```{r age_plot, echo=FALSE}
+```
+
+### BMI
+```{r bmi_plot, echo=FALSE}
+```
+
+### Gender
+```{r gender_plot, echo=FALSE}
+```
+
+### Race/Ethnicity
+```{r race_plot, echo=FALSE}
+```
+
+### Education
+```{r edu_plot, echo=FALSE}
+```
+
+### Poverty
+```{r poverty_plot, echo=FALSE}
+```
+
+Poverty is based on family size, income, and location. A value of `1` represents the poverty threshold. Ratios over `5` are categorized as `5` to preserve anonymity.
+
+## Questionnaire
+### Doctor opinion
+```{r doc_plot, echo=FALSE}
+```
+
+### Sitting minutes
+```{r sitting_plot, echo=FALSE}
+```
+
+### Vigorous activity at work
+```{r phys_work_plot, echo=FALSE}
+```
+
+### Vigorous recreational activity
+```{r phys_rec_plot, echo=FALSE}
+```
