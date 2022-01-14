@@ -1,5 +1,5 @@
-# Effect of work week hours on total blood cholesterol levels in the United States
-A research project compiled by Christian Hicks and advised by fauculty of San Diego State University's Master of Public Health program.
+# Effect of working hours on total blood cholesterol levels in the United States
+A research project compiled by <a href="https://www.linkedin.com/in/christianjhicks/" title="LinkedIn">Christian Hicks</a> and advised by fauculty of San Diego State University's Master of Public Health program.
 
 ## Manuscript
 
