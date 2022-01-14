@@ -1,7 +1,11 @@
 # MPH Thesis
  Examinig the effect of weekly working hours on total blood cholesterol levels of the U.S. population.
+ 
  By Christian Hicks
+```
+Folder structure
 
+MPH-Thesis
 +-- data //Original datafiles downloaded from the CDC's NHANES 2017-2018
 +-- doc //
 |   +-- drafts //Manuscript related works in progress
@@ -15,3 +19,4 @@
 |   +-- bivariate //Analysis of association between total blood cholesterol and selected variables
 |   +-- exploratory //Analysis of selected variables
 |   +-- trash //Old files preserved for edit history before Github upload date
+```
