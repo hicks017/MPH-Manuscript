@@ -6,8 +6,8 @@ chol_label <- 'total cholesterol (mg/dL)'
 phys_rec_vig <- as.factor(phys_rec_vig)
 quant <- c(0.25, 0.5, 0.75)
 # Weighted data
-svy1 <- svydesign(ids = df_combined$SEQN,
-                  weights = df_combined$weight_mec,
+svy1 <- svydesign(ids = SEQN,
+                  weights = weight_mec,
                   data = df_combined)
 
 ## ---- phys_rec_tt --------

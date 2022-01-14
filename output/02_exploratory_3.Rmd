@@ -4,8 +4,10 @@ author: "Christian Hicks"
 date: "Last compiled on `r format(Sys.time(), '%d %B %Y')`"
 output:
   html_document:
-    toc: true
-    toc_float: true
+    toc: yes
+    toc_float: yes
+  pdf_document:
+    toc: yes
 ---
 
 ```{r setup, include=FALSE}
@@ -24,8 +26,9 @@ knitr::read_chunk('../src/exploratory/exp_phys_work.R')
 knitr::read_chunk('../src/exploratory/exp_phys_rec.R')
 knitr::opts_chunk$set(echo = TRUE)
 df_combined <- readRDS('./data/combined.Rds')
-svy1 <- svydesign(ids = df_combined$SEQN,
-                  weights = df_combined$weight_mec,
+attach(df_combined)
+svy1 <- svydesign(ids = SEQN,
+                  weights = weight_mec,
                   data = df_combined)
 ```
 

@@ -22,8 +22,8 @@ race_eth <- relevel(as.factor(race_eth), ref = '3')
 education <- relevel(as.factor(education), ref = '3')
 
 # Weighted data
-svy1 <- svydesign(ids = df_combined$SEQN,
-                  weights = df_combined$weight_mec,
+svy1 <- svydesign(ids = SEQN,
+                  weights = weight_mec,
                   data = df_combined)
 ```
 
@@ -52,7 +52,8 @@ new_df <- with(df_combined,
 new_df$bld_tc <- predict(model_fit, new_df)
 ggplot(df_combined, aes(x = wrk_hrs, y = bld_tc)) +
   geom_point() +
-  geom_line(data = new_df, aes(col = 'red'))
+  geom_line(data = new_df, aes(col = 'red')) +
+  theme(legend.position = 'none')
 summary(model_fit)
 confint.lm(model_fit)
 ```

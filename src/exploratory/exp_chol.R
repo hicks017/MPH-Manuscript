@@ -3,8 +3,8 @@ pacman::p_load('knitr', 'broom', 'Hmisc', 'survey', 'tidyverse')
 df_combined <- readRDS('./output/data/combined.Rds')
 attach(df_combined)
 # Weighted data
-svy1 <- svydesign(ids = df_combined$SEQN,
-                  weights = df_combined$weight_mec,
+svy1 <- svydesign(ids = SEQN,
+                  weights = weight_mec,
                   data = df_combined)
 
 ## ---- chol_plot ----
@@ -18,18 +18,13 @@ ggplot(df_combined,
                  fill = 'grey') +
   stat_density(geom = 'line', aes(color = 'kernal')) +
   stat_function(fun = dnorm,
-                args = list(mean = wtd.mean(df_combined$bld_tc,
-                                            df_combined$weight_mec),
-                            sd = sqrt(wtd.var(df_combined$bld_tc,
-                                              df_combined$weight_mec))),
+                args = list(mean = wtd.mean(bld_tc, weight_mec),
+                            sd = sqrt(wtd.var(bld_tc, weight_mec))),
                 aes(color = 'normal')) +
-  geom_vline(aes(xintercept = svymean(~bld_tc, svy1)[1], color = 'mean'),
+  geom_vline(aes(xintercept = wtd.mean(bld_tc, weight_mec), color = 'mean'),
              size = 1,
              linetype = 'dashed') +
-  geom_vline(aes(xintercept = as.numeric(svyquantile(~bld_tc,
-                                                     svy1,
-                                                     0.5,
-                                                     ci = F)[1]),
+  geom_vline(aes(xintercept = wtd.quantile(bld_tc, weight_mec, 0.5),
                  color = 'median'),
              size = 1,
              linetype = 'dashed') +
@@ -41,11 +36,11 @@ ggplot(df_combined,
   ggtitle('Blood Cholesterol distribution') +
   theme(legend.position = 'bottom', legend.direction = 'horizontal') +
   scale_y_continuous(sec.axis = sec_axis(
-    trans = ~. * sum(df_combined$weight_mec), name = 'count')) +
+    trans = ~. * sum(weight_mec), name = 'count')) +
   xlab('total cholesterol (mg/dL)')
 
 ## ---- chol_stats ----
-# Min, max, quantiles, and mean
+# Min, max, quantiles, and mean with standard errors
 svyquantile(~bld_tc, svy1, c(0, 0.25, 0.5, 0.75, 1))
 svymean(~bld_tc, svy1)
 

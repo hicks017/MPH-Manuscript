@@ -3,8 +3,8 @@ pacman::p_load('knitr', 'broom', 'Hmisc', 'survey', 'tidyverse')
 df_combined <- readRDS('./output/data/combined.Rds')
 attach(df_combined)
 # Weighted data
-svy1 <- svydesign(ids = df_combined$SEQN,
-                  weights = df_combined$weight_mec,
+svy1 <- svydesign(ids = SEQN,
+                  weights = weight_mec,
                   data = df_combined)
 
 ## ---- doc_plot ----
