@@ -9,6 +9,7 @@ svy1 <- svydesign(ids = df_combined$SEQN,
 
 ## ---- chol_plot ----
 # Histogram
+options(scipen = 999)
 ggplot(df_combined,
        aes(x = bld_tc, weight = weight_mec)) +
   geom_histogram(aes(y = ..density..),
@@ -39,7 +40,8 @@ ggplot(df_combined,
                                 median = 'blue')) +
   ggtitle('Blood Cholesterol distribution') +
   theme(legend.position = 'bottom', legend.direction = 'horizontal') +
-  scale_y_continuous(sec.axis = sec_axis(trans = ~.*106745272)) +
+  scale_y_continuous(sec.axis = sec_axis(
+    trans = ~. * sum(df_combined$weight_mec), name = 'count')) +
   xlab('total cholesterol (mg/dL)')
 
 ## ---- chol_stats ----

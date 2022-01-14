@@ -9,6 +9,7 @@ svy1 <- svydesign(ids = df_combined$SEQN,
 
 ## ---- age_plot ----
 # Histogram
+options(scipen = 999)
 ggplot(df_combined, aes(x = age, weight = weight_mec)) +
   geom_histogram(aes(y = ..density..),
                  color = 'black',
@@ -38,7 +39,8 @@ ggplot(df_combined, aes(x = age, weight = weight_mec)) +
                                 median = 'blue')) +
   ggtitle('Age distribution, weighted study population') +
   theme(legend.position = 'bottom', legend.direction = 'horizontal') +
-  scale_y_continuous(sec.axis = sec_axis(trans = ~.*106745272, name = 'count'))
+  scale_y_continuous(sec.axis = sec_axis(
+    trans = ~. * sum(df_combined$weight_mec), name = 'count'))
 
 ## ---- age_stats ----
 # Min, max, quantiles, and mean
