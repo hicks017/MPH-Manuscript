@@ -15,7 +15,7 @@ MPH-Thesis
 +-- output //Data analysis reports
 |   +-- data //Project datasets used for analysis
 |   +-- trash //Old files preserved for edit history before Github upload date
-+-- src
++-- src //Source code for output production
 |   +-- bivariate //Analysis of association between total blood cholesterol and selected variables
 |   +-- exploratory //Analysis of selected variables
 |   +-- trash //Old files preserved for edit history before Github upload date
