@@ -1,7 +1,7 @@
 # Effect of working hours on total blood cholesterol levels in the United States
 A research project compiled by <a href="https://www.linkedin.com/in/christianjhicks/" title="LinkedIn">Christian Hicks</a> and advised by faculty of San Diego State University's Master of Public Health program.
 
-## Manuscript
+## Written report
 
 The written report is still a work in progress and will be linked here when completed.
 
