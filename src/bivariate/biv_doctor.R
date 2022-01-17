@@ -17,8 +17,8 @@ plot_doc_wtd <- qplot(reorder(chol_doctor_hi, bld_tc, median), bld_tc,
                       geom = 'violin',
                       draw_quantiles = quant,
                       fill = chol_doctor_hi) +
-  scale_x_discrete(labels = c('No (reference)', 'Does not know', 'Yes')) +
   theme(legend.position = 'none') +
+  scale_x_discrete(labels = c('No (reference)', 'Yes')) +
   labs(x = 'doctor says cholesterol is high',
        y = chol_label,
        title = 'Cholesterol by response, weighted')
@@ -26,7 +26,6 @@ model_doc_wtd <- svyglm(bld_tc ~ relevel(as.factor(chol_doctor_hi), ref = '2'),
                         svy1)
 model_doc_tbl_wtd <- model_doc_wtd %>% tidy()
 model_doc_tbl_wtd[2, 1] <- 'Yes'
-model_doc_tbl_wtd[3, 1] <- 'Does not know'
 model_doc_tbl_wtd <- model_doc_tbl_wtd %>% 
   kable(caption = 'Model: total cholesterol = int + doctor_opinion',
         format = 'markdown', digits = c(3, 3, 3, 3, 4))
