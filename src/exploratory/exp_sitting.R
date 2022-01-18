@@ -35,6 +35,6 @@ ggplot(df_combined,
                      values = c(median = 'blue', mean = 'red'))
 
 ## ---- sitting_stats ----
-# Min, max, quantiles, and mean
+# Min, max, quantiles, and mean with standard errors
 svyquantile(~sitting_min_daily, svy1, c(0, 0.25, 0.5, 0.75, 1))
 svymean(~sitting_min_daily, svy1)
