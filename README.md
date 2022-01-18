@@ -1,6 +1,6 @@
 <a href="https://www.christianhicks.com" title="Homepage">Return to homepage</a>
 # Effect of working hours on total blood cholesterol levels in the United States
-A research project compiled by <a href="https://www.linkedin.com/in/christianjhicks/" title="LinkedIn" target="_blank">Christian Hicks</a> and advised by faculty of San Diego State University's Master of Public Health program.
+A research project compiled by <a href="https://www.linkedin.com/in/christianjhicks/" title="LinkedIn" target="_blank">Christian Hicks</a> and advised by faculty of San Diego State University's Master of Public Health program. The datasets used in this project were obtained from the CDC's publicly available <a href="https://wwwn.cdc.gov/nchs/nhanes/continuousnhanes/default.aspx?BeginYear=2017" target="NHANES 2017-2018">National Health and Nutrition Examination Survey (NHANES) 2017-2018</a>.
 
 ## Source code
 
