@@ -5,7 +5,7 @@ A research project compiled by <a href="https://www.linkedin.com/in/christianjhi
 
 The written report is still a work in progress and will be linked here when completed.
 
-## Supporting data analysis without commentary
+## Data Analysis Materials
 
 <a href="https://hicks017.github.io/MPH-Manuscript/output/02_exploratory_3.html" title="Exploratory" target="_blank">Variable exploration</a>: Descriptive statistics of the independent variables included in this study.
 
