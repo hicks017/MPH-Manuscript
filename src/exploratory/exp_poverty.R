@@ -26,8 +26,8 @@ ggplot(df_combined, aes(x = income_pov_ratio, weight = weight_mec)) +
                      values = c(median = 'blue', mean = 'red'))
 
 ## ---- poverty_stats ----
-# Min, max, and quantiles with standard errors
+# Min, max, and quantiles
 svyquantile(~income_pov_ratio, svy1, c(0, 0.25, 0.5, 0.75, 1))
 
-# Povert ratio <= 1 with standard errors
+# Proportion of poverty ratio <= 1
 svymean(~below_pov, svy1)

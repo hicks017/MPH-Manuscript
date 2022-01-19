@@ -23,5 +23,5 @@ ggplot(df_combined, aes(x = as.factor(gender), weight =weight_mec)) +
 # Count
 wtd.table(gender, weight_mec, type = 'table')
 
-# Male proportion and 95% CI
-svyciprop(~gender, svy1)
+# Male proportion
+svymean(~gender, svy1)

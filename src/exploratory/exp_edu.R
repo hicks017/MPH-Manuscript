@@ -35,5 +35,5 @@ wtd.table(education, weight_mec, type = 'table') %>%
   prop.table() %>% 
   round(3)
 
-# Attended college or finished college with standard errors
+# Attended college or finished college
 svymean(~college_attnd, svy1, na.rm = T)

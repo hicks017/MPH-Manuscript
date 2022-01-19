@@ -1,6 +1,12 @@
 # Setup
 pacman::p_load('knitr', 'broom', 'Hmisc', 'survey', 'tidyverse')
 df_combined <- readRDS('./output/data/combined.Rds')
+df_male <- readRDS('./output/data/male.Rds')
+df_female <- readRDS('./output/data/female.Rds')
+# Cholesterol 200 mg/dL or higher
+df_combined$chol200 <- ifelse(df_combined$bld_tc >= 200, 1, 0)
+# Cholesterol 240 mg/dL or higher
+df_combined$chol240 <- ifelse(df_combined$bld_tc >= 240, 1, 0)
 attach(df_combined)
 # Weighted data
 svy1 <- svydesign(ids = SEQN,
@@ -40,19 +46,13 @@ ggplot(df_combined,
   xlab('total cholesterol (mg/dL)')
 
 ## ---- chol_stats ----
-# Min, max, quantiles, and mean with standard errors
+# Min, max, quantiles, and mean
 svyquantile(~bld_tc, svy1, c(0, 0.25, 0.5, 0.75, 1))
 svymean(~bld_tc, svy1)
 
-# Proportion of 200 mg/dL and over
-# Verify observations 99:201 are 200 mg/dL or higher
-tc_tbl <- wtd.table(bld_tc, weights = weight_mec)
-tc_tbl$sum.of.weights[99:201] %>% sum() / tc_tbl$sum.of.weights %>% sum()
-# 240 mg/dL and higher
-tc_tbl$sum.of.weights[139:201] %>% sum() / tc_tbl$sum.of.weights %>% sum()
+# Proportion of 200 mg/dL and over, 240 mg/dL and higher
+svymean(~chol200 + chol240, svy1)
 
 # Gender stratification, mean TC
-df_female <- df_combined %>% subset(gender == 0)
-df_male <- df_combined %>% subset(gender == 1)
-wtd.mean(df_female$bld_tc, weights = df_female$weight_mec)
 wtd.mean(df_male$bld_tc, weights = df_male$weight_mec)
+wtd.mean(df_female$bld_tc, weights = df_female$weight_mec)

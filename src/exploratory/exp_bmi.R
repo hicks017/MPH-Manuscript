@@ -39,7 +39,7 @@ ggplot(df_combined, aes(x = bmi, weight = weight_mec)) +
     trans = ~. * sum(weight_mec), name = 'count'))
 
 ## ----bmi_stats ----
-# Min, max, quantiles, and mean with standard errors
+# Min, max, quantiles, and mean
 svyquantile(~bmi, svy1, c(0, 0.25, 0.5, 0.75, 1))
 svymean(~bmi, svy1)
 
