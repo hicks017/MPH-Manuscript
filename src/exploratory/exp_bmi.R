@@ -1,6 +1,7 @@
 # Setup
 pacman::p_load('knitr', 'broom', 'Hmisc', 'survey', 'tidyverse')
 df_combined <- readRDS('./output/data/combined.Rds')
+df_combined$bmi25 <- ifelse(df_combined$bmi >= 25, 1, 0) # BMI over 25
 attach(df_combined)
 # Weighted data
 svy1 <- svydesign(ids = SEQN,
@@ -43,5 +44,4 @@ svyquantile(~bmi, svy1, c(0, 0.25, 0.5, 0.75, 1))
 svymean(~bmi, svy1)
 
 # Proportion of 25 or greater BMI
-bmi_tbl <- wtd.table(bmi, weights = weight_mec)
-bmi_tbl$sum.of.weights[80:317] %>% sum() / bmi_tbl$sum.of.weights %>% sum()
+svymean(~bmi25, svy1)

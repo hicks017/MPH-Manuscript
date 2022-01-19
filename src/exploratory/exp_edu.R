@@ -1,6 +1,9 @@
 # Setup
 pacman::p_load('knitr', 'broom', 'Hmisc', 'survey', 'tidyverse')
 df_combined <- readRDS('./output/data/combined.Rds')
+# Attended/Finished college
+df_combined$college_attnd <- ifelse(
+  df_combined$education >=4, 1, ifelse(is.na(df_combined$education), NA, 0))
 attach(df_combined)
 # Weighted data
 svy1 <- svydesign(ids = SEQN,
@@ -31,3 +34,6 @@ wtd.table(education, weight_mec, type = 'table')
 wtd.table(education, weight_mec, type = 'table') %>% 
   prop.table() %>% 
   round(3)
+
+# Attended college or finished college with standard errors
+svymean(~college_attnd, svy1, na.rm = T)
