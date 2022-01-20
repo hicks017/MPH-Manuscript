@@ -7,12 +7,13 @@ output:
     toc: true
     toc_float: true
 ---
-
+<a href="https://www.christianhicks.com">Return home</a> / <a href="https://www.christianhicks.com/MPH-Manuscript">Return to project</a>.
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
 pacman::p_load('MASS', 'Hmisc', 'knitr', 'broom', 'survey', 'tidyverse')
+opts_chunk$set(echo = F)
 df_combined <- readRDS('./data/combined.Rds')
 attach(df_combined)
+
 # Factorizing variables
 gender <- as.factor(gender)
 chol_doctor_hi <- relevel(as.factor(chol_doctor_hi), ref = 2)
@@ -27,7 +28,7 @@ svy1 <- svydesign(ids = SEQN,
                   data = df_combined)
 ```
 
-```{r model, echo=FALSE}
+```{r model}
 model_full <- lm(bld_tc ~ wrk_hrs + age + bmi + sitting_min_daily +
                    income_pov_ratio + gender + chol_doctor_hi +
                    phys_work_vig + phys_rec_vig + race_eth + education,

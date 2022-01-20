@@ -7,10 +7,10 @@ output:
     toc: true
     toc_float: true
 ---
-
+<a href="https://www.christianhicks.com">Return home</a> / <a href="https://www.christianhicks.com/MPH-Manuscript">Return to project</a>.
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
 pacman::p_load('tidyverse', 'tableone', 'survey', 'knitr')
+opts_chunk$set(echo = F)
 df_combined <- readRDS('./data/combined.Rds')
 attach(df_combined)
 

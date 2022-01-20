@@ -7,23 +7,20 @@ output:
     toc: true
     toc_float: true
 ---
-
+<a href="https://www.christianhicks.com">Return home</a> / <a href="https://www.christianhicks.com/MPH-Manuscript">Return to project</a>.
 ```{r setup, include=FALSE, cache=FALSE}
 pacman::p_load('knitr', 'broom', 'survey', 'tidyverse')
-knitr::read_chunk('../src/bivariate/biv_work.R')
-knitr::read_chunk('../src/bivariate/biv_age.R')
-knitr::read_chunk('../src/bivariate/biv_bmi.R')
-knitr::read_chunk('../src/bivariate/biv_gender.R')
-knitr::read_chunk('../src/bivariate/biv_race.R')
-knitr::read_chunk('../src/bivariate/biv_education.R')
-knitr::read_chunk('../src/bivariate/biv_poverty.R')
-knitr::read_chunk('../src/bivariate/biv_doctor.R')
-knitr::read_chunk('../src/bivariate/biv_sitting.R')
-knitr::read_chunk('../src/bivariate/biv_phys_work.R')
-knitr::read_chunk('../src/bivariate/biv_phys_rec.R')
-opts_chunk$set(echo = TRUE)
+opts_chunk$set(echo = F)
 df_combined <- readRDS('data/combined.Rds')
 attach(df_combined)
+
+# Read all bivariate files
+src_names <- c('work', 'age', 'bmi', 'gender', 'race', 'education', 'poverty',
+               'doctor', 'sitting', 'phys_work', 'phys_rec')
+src_files <- lapply(src_names, function(x){
+  paste0('../src/bivariate/biv_', x, '.R')
+})
+lapply(src_files, knitr::read_chunk)
 
 # Factorizing variables
 gender <- as.factor(gender)
@@ -47,7 +44,7 @@ svy1 <- svydesign(ids = SEQN,
 ```{r wrk_reg, include=FALSE}
 ```
 
-```{r wrk_hrs_output, echo=FALSE}
+```{r wrk_hrs_output}
 ```
 
 Correlation: `r c_wrk_wtd`
@@ -58,7 +55,7 @@ Correlation: `r c_wrk_wtd`
 ```{r age_reg, include=FALSE}
 ```
 
-```{r age_output, echo=FALSE}
+```{r age_output}
 ```
 
 Correlation: `r c_age_wtd`
@@ -68,7 +65,7 @@ Correlation: `r c_age_wtd`
 ```{r bmi_reg, include=FALSE}
 ```
 
-```{r bmi_output, echo=FALSE}
+```{r bmi_output}
 ```
 
 Correlation: `r c_bmi_wtd`
@@ -77,7 +74,7 @@ Correlation: `r c_bmi_wtd`
 ```{r gender_tt, include=FALSE}
 ```
 
-```{r gender_output, echo=FALSE}
+```{r gender_output}
 ```
 
 T test:
@@ -92,7 +89,7 @@ Male mean (SD): `r mean_gen_m_wtd[1] %>% format(digits = 5)` (`r sd_gen_m_wtd %>
 ```{r race_anova, include=FALSE}
 ```
 
-```{r race_output, echo=FALSE}
+```{r race_output}
 ```
 
 ANOVA:
@@ -117,7 +114,7 @@ Other race or Multi-Racial mean (SD): `r mean_race_7_wtd %>% format(digits = 5)`
 ```{r education_anova, include=FALSE}
 ```
 
-```{r education_output, echo=FALSE}
+```{r education_output}
 ```
 
 ANOVA:
@@ -136,7 +133,7 @@ College graduate mean (SD): `r mean_edu_5_wtd %>% format(digits = 5)` (`r sd_edu
 ```{r poverty_reg, include=FALSE}
 ```
 
-```{r poverty_output, echo=FALSE}
+```{r poverty_output}
 ```
 
 Correlation: `r c_pov_wtd`
@@ -147,7 +144,7 @@ Correlation: `r c_pov_wtd`
 ```{r doctor_tt, include=FALSE}
 ```
 
-```{r doctor_output, echo=FALSE}
+```{r doctor_output}
 ```
 
 ANOVA: 
@@ -172,7 +169,7 @@ Don't know mean (SD): `r mean_doc_dont_wtd %>% format(digits = 4)` (`r sd_doc_do
 ```{r sitting_reg, include=FALSE}
 ```
 
-```{r sitting_output, echo=FALSE}
+```{r sitting_output}
 ```
 
 Correlation: `r c_sit_wtd`
@@ -181,7 +178,7 @@ Correlation: `r c_sit_wtd`
 ```{r phys_work_ttest, include=FALSE}
 ```
 
-```{r phys_work_output, echo=FALSE}
+```{r phys_work_output}
 ```
 T test:
 
@@ -195,7 +192,7 @@ No mean (SD): `r mean_vig_w_no_wtd %>% format(digits = 5)` (`r sd_vig_w_no_wtd %
 ```{r phys_rec_tt, include=FALSE}
 ```
 
-```{r phys_rec_output, echo=FALSE}
+```{r phys_rec_output}
 ```
 
 T test:
