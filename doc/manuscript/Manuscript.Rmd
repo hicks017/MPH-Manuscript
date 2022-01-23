@@ -1,5 +1,5 @@
 ---
-title: Is greater number of hours worked in the prior week associated with high total blood cholesterol among men and women ages 18-80 from NHANES 2017-2018 participants of the United States?
+title: WORKING DRAFT... Is greater number of hours worked in the prior week associated with high total blood cholesterol among men and women ages 18-80 from NHANES 2017-2018 participants of the United States?
 author:
     name: Christian Hicks
     email: chicks5799@sdsu.edu
@@ -65,6 +65,70 @@ Prior research has examined long working hours and its association with blood ch
 ### Research question
 
 Is greater number of hours worked in the prior week associated with subsequent high total blood cholesterol among adults aged 18-80 in the United States, using NHANES 2017-2018 participant data? **H0:** There is not an association between greater working hours in the past week and high total blood cholesterol. **H1:** There is a significant positive association between greater working hours in the past week and high total blood cholesterol.
+
+Methods
+=======
+
+### Study design and setting
+
+The National Center for Health Statistics (NCHS) administered the National Health and Nutrition Examination Survey (NHANES) during 2017 and 2018. This survey recorded health information, status, and measurements for the purpose of estimating nationwide disease prevalence and aiding in health policy development. The sample design was a complex multi-level process that oversampled and undersampled certain demographics that later became weighted to represent the whole noninstitutionalized civilian population of the United States. Participants were interviewed about their personal demographics, health status, and behaviors, while measurements were recorded by a mobile clinic during a standardized physical examination.
+
+### Study population
+
+During 2017-2018 the National Health and Nutrition Examination Survey (NHANES) recruited 9,254 participants. Of these participants, 1,715 were selected based on their blood tests and questionnaire results. All selected observations had recorded total blood cholesterol measurements, at least 30 total hours worked at all jobs during the week prior to being surveyed, were not currently taking cholesterol medication, and were at least 18 years of age.
+
+### Data sources and measurement
+
+Exposure: Total working hours in the week prior to the survey administration was obtained from a series of questions. First participants were asked “In this part of the survey I will ask you questions about your work experience. Which of the following were you doing last week?” The options to answer this question were as followed: Working at a job or business; with a job or business but not at work; looking for work; not working at a job or business; refused; or don’t know. Only those who responded that they worked at a job or business were considered for this study. A follow-up question was asked to those who responded as such: “How many hours did you work last week at all jobs or businesses?” Those who answered between 1 and 5 hours were recorded as “5”. Six to 78 hours were recorded as discrete values. No respondents reported 79 hours, and those who reported 80 or more were recorded as “80”. Refusals to report and “Don’t know” were also recorded. The goal of this study was to examine full-time workers, so observations were dropped from the analysis if they worked less than 30 hours, refused to report, or did not know how many hours they worked last week.
+
+Outcome: Total blood cholesterol was recorded by a combined effort of collecting blood samples by the mobile examination clinic and enzymatic assay methods performed by contracted laboratories. Collection of the samples occurred immediately prior to questionnaire data was obtained. After the completion of the laboratory analyses, total blood cholesterol was recorded as discrete values with units of milligrams per deciliter (mg/dL) of blood. No parameters were placed to make exclusions based on these results.
+
+Covariates: Variables included in the study were chosen based on modern knowledge of risk factors related to high total blood cholesterol, along with common covariates of past research with similar topics. Two variables were modified from the NHANES 2017-2018 dataset to consolidate similar categories. Those who self-reported being Mexican American or Other Hispanic were collapsed into a single Hispanic category. Also, having not attended high school was combined with not finishing high school or obtaining a GED. This group was considered as No High School Diploma.
+
+### Efforts to address bias
+
+Those who worked less than full-time in the prior week, defined as less than 30 hours, were removed from the study to prevent a potential bias that could come from observations who had not worked at all or worked very little. Children and adolescents were removed as they may not have lived long enough to observe direct effects of working hours on total blood cholesterol. The final model controlled for the effects of the selected covariates to measure the association more accurately between prior week working hours and total blood cholesterol.
+
+### Statistical methods
+
+Descriptive and analytic statistics were calculated with R 4.1.1 “Kick Things” and utilized the weights included with the NHANES 2017-2018 dataset. No unweighted statistics are listed in Tables 1-3. Total blood cholesterol was normally distributed amongst the weighted population; therefore, the mean and standard deviation were included in Table 1. All other continuous variables were nonnormal and the medians with minimum and maximum values were reported.
+
+Simple linear regression was used to determine the effects of the continuous variables on total blood cholesterol for the bivariate analysis. Pearson’s correlation was used to describe the strength of these effects. Bartlett’s test for homogeneity was used to determine the inclusion of a categorical variable in the bivariate analysis. Independent t-tests and ANOVA were performed to calculate differences in means for the included categorical variables. Multiple linear regression was used to build the adjusted model of determining the effect of prior week working hours on total blood cholesterol.
+
+Results
+=======
+
+### Key findings
+
+- 37.0% of the weighted population had clinically high total blood cholesterol.
+- 47.0% reported working more than 40 hours in the prior week.
+- Each hour worked was associated with a decrease of total blood cholesterol by 0.28 mg/dL after adjusting for covariates.
+- Race and vigorous recreational activity had the largest effect on total blood cholesterol in the adjusted model.
+
+### Study population
+
+The NHANES 2017-2018 dataset consisted of 9,254 observations that was reduced to 1,715 observations due to the exclusion criteria of this study. The final study population was weighted to represent 95,960,477 non-institutionalized adults of the United States.
+
+### Demographics
+
+The weighted interquartile range for age was 29 – 51 years old. A BMI of 25 or greater was recorded for 72.9% of the weighted population (SE = 1.6%). The prevalence of either college attendance or completion of an advanced degree was 66.2% (SE = 1.7%). Household income at or below poverty lines was calculated in 9.0% of the weighted population (SE = 0.7%).
+
+### Total blood cholesterol
+
+Total blood cholesterol was normally distributed within the weighted population and had a mean of 190.0 mg/dL (SE = 1.4). Approximately 37.0% had a clinically high total blood cholesterol of over 200 mg/dL (SE = 1.8%) and 9.9% had a very high blood cholesterol of 240 mg/dL or higher (SE = 1.1%).
+
+### Working hours
+
+Approximately 33.6% of the weighted population worked exactly 40 hours (SE = 1.7%) and 46.9% worked more than 40 hours (SE = 1.8%). The proportion of those who worked between 30-39 hours was 19.4% (SE = 1.4%). Male mean working hours was 46.7 hours (SE = 0.6) whereas the female mean was 42.8 hours (SE = 0.5).
+
+### Bivariate analysis
+
+Prior week working hours had a weak negative unadjusted correlation with total blood cholesterol (R = -0.08) and accounted for a decrease in total blood cholesterol by 0.31 mg/dL for every hour worked (95% CI = -0.53 – -0.09). The strongest positive unadjusted correlation with total blood cholesterol were age (R = 0.31) and BMI (R = 0.12). An increase of 1 year in age was associated with an increase of 0.93 mg/dL (95% CI = 0.72 – 1.1) in total blood cholesterol. For BMI, an increase of 1 unit was associated with an increase of total blood cholesterol by 0.65 mg/dL (95% CI = 0.32 – 0.97). Taking part in vigorous recreational physical activity reduced total blood cholesterol by 11.1 mg/dL (95% CI = 5.8 – 16.3). Non-Hispanic Blacks had the lowest mean total blood cholesterol (mean = 182.5 mg/dL, SE = 2.2) while the Other and Multi-racial category had the highest (mean = 200.0 mg/dL, SE = 5.3). Higher levels of education generally decreased mean total blood cholesterol, but these differences were not significant. 
+
+### Multivariable analysis
+
+The adjusted model more accurately predicted the variance in total blood cholesterol (Adjusted R2 = 0.12) compared to the unadjusted model of prior week working hours (Adjusted R2 = -0.0004), though both were not strong predictors. Each hour worked was associated with an average reduction in total blood cholesterol by 0.28 mg/dl (95% CI = -0.44 – -0.11) after adjusting for age, BMI, rigorous recreational activity, income-to-poverty ratio, and race/ethnicity. Race and self-reporting vigorous recreational physical activity had the largest effects on total blood cholesterol in the adjusted model.
+
 
 References {#references .unnumbered}
 ==========
