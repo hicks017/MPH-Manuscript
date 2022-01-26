@@ -4,11 +4,11 @@ pacman::p_load('haven', 'naniar', 'data.table', 'tidyverse')
 
 # Table of Contents -------------------------------------------------------
 
-#   1.  Import Data
-#   2.  Flow Chart
-#   3.  Recode, Rename, and Drop
+#   1.  Import data
+#   2.  Merge and subset
+#   3.  Recode, rename, and drop
 #   4.  Missing numbers
-#   5.  Subset and Save
+#   5.  Save
 
 
 # Import Data --------------------------------------------------
@@ -23,7 +23,7 @@ df_phys <- read_xpt('./data/PAQ_J.XPT')
 df_body <- read_xpt('./data/BMX_J.XPT')
 df_dem <-  read_xpt('./data/DEMO_J.XPT')
 
-# Flow Chart --------------------------------------------------------------
+# Merge and subset --------------------------------------------------
 
 # Drop lab ID's with no lab data.
 # removed = 697; n = 6738
@@ -60,7 +60,7 @@ df_combined <- df_combined %>% subset(RIDAGEYR >= 18)
 # removed = 256, n = 1,715
 df_combined <- df_combined %>% subset(BMXBMI >= 0 & INDFMPIR >= 0)
 
-# Rename, Recode, and Drop ------------------------------------------------
+# Rename, recode, and drop ------------------------------------------------
 
 # Renaming variables
 # new_name = old_name
@@ -146,7 +146,7 @@ df_combined <- df_combined %>% select(c(all_of(my_vars)))
 # Missing numbers reported in above comments
 colSums(is.na(df_combined)) %>% as.data.frame()
 
-# Subset and Save ---------------------------------------------------------
+# Save ---------------------------------------------------------
 
 # Subset males and females
 df_male <- df_combined %>% subset(gender == 1)
