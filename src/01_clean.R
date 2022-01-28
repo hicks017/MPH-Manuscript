@@ -39,10 +39,11 @@ df_combined <- df_tot_chol %>% inner_join(df_work, by = 'SEQN')
 # Add data from questionnaire, physical activity, and demographic datasets
 # Left join prevents removal of IDs from df_combined
 # removed = 0; n = 5446
-df_combined <- df_combined %>% left_join(df_question_chol, by = 'SEQN')
-df_combined <- df_combined %>% left_join(df_phys, by = 'SEQN')
-df_combined <- df_combined %>% left_join(df_dem, by = 'SEQN')
-df_combined <- df_combined %>% left_join(df_body, by = 'SEQN')
+df_combined <- df_combined %>% 
+  left_join(., df_question_chol, by = 'SEQN') %>%
+  left_join(., df_phys, by = 'SEQN') %>%
+  left_join(., df_dem, by = 'SEQN') %>% 
+  left_join(., df_body, by = 'SEQN')
 
 # Remove observations currently taking cholesterol medication
 # removed = 1072; n = 4374
@@ -67,41 +68,37 @@ df_combined <- df_combined %>% subset(BMXBMI >= 0 & INDFMPIR >= 0)
 df_combined <- df_combined %>% 
   rename(wrk_hrs = OCQ180,
          bld_tc = LBXTC,
-         chol_doctor_hi = BPQ080,
-         chol_checked_ever = BPQ060, # 359 missing
-         chol_checked_last = BPQ070, # 582 missing
-         chol_doctor_rx = BPQ090D, # 582 missing
-         chol_taking_rx = BPQ100D, # 1822 missing
-         phys_work_vig = PAQ605,
+         chol_doctor_hi = BPQ080, # 5 missing
+         chol_checked_ever = BPQ060, # 306 missing
+         chol_checked_last = BPQ070, # 503 missing
+         chol_doctor_rx = BPQ090D, # 503 missing
+         chol_taking_rx = BPQ100D, # 1588 missing
+         phys_work_vig = PAQ605, # 1 missing
          phys_work_mod = PAQ620,
          phys_rec_vig = PAQ650,
          phys_rec_mod = PAQ665,
-         sitting_min_daily = PAD680, # 2 missing
+         sitting_min_daily = PAD680, # 3 missing
          gender = RIAGENDR,
          age = RIDAGEYR,
          race_eth = RIDRETH3,
-         education = DMDEDUC2, # 55 missing
-         marital = DMDMARTL, # 55 missing
-         income_family = INDFMIN2, # 93 missing
-         income_pov_ratio = INDFMPIR, # 246 missing, more than 10% of study pop
-         bmi = BMXBMI, # 17 missing
+         education = DMDEDUC2, # 44 missing
+         marital = DMDMARTL, # 42 missing
+         income_family = INDFMIN2,
+         income_pov_ratio = INDFMPIR,
+         bmi = BMXBMI,
          weight_mec = WTMEC2YR)
 
 # Replace with NA
 # 7s: Refused to answer
 # 9s: Don't know
 df_combined <- df_combined %>% 
-  replace_with_na(list(sitting_min_daily = c(9999))) # Sitting; 2 observations
-df_combined <- df_combined %>% 
-  replace_with_na(list(education = c(7, 9))) # Education; 1 observation of each
-df_combined <- df_combined %>% 
-  replace_with_na(
-    list(phys_work_vig = 9) # Vigorous work activity; 1 observation
-  )
-df_combined <- df_combined %>% 
-  replace_with_na(
-    list(chol_doctor_hi = 9) # Doctor says high cholesterol; 7 observations
-  )
+  replace_with_na(list(sitting_min_daily = c(9999))) %>%  
+  replace_with_na(list(education = c(7, 9))) %>%  
+  replace_with_na(list(phys_work_vig = 9)) %>%  
+  replace_with_na(list(chol_doctor_hi = 9))
+
+# Missing numbers reported in above comments
+colSums(is.na(df_combined)) %>% as.data.frame()
 
 # Recode gender from (1 = male, 2 = female) to (0 = female, 1 = male)
 df_combined$gender <- ifelse(df_combined$gender == 2, 0, 1)
@@ -142,9 +139,6 @@ my_vars <- c(
   'bmi',
   'weight_mec')
 df_combined <- df_combined %>% select(c(all_of(my_vars)))
-
-# Missing numbers reported in above comments
-colSums(is.na(df_combined)) %>% as.data.frame()
 
 # Save ---------------------------------------------------------
 
