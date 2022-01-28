@@ -16,12 +16,12 @@ pacman::p_load('haven', 'naniar', 'data.table', 'tidyverse')
 # Import original datasets
 # Overall n = 9254
 # Lab participant n = 7435
-df_tot_chol <- read_xpt('./data/TCHOL_J.XPT')
-df_work <- read_xpt('./data/OCQ_J.XPT')
-df_question_chol <- read_xpt('./data/BPQ_J.XPT')
-df_phys <- read_xpt('./data/PAQ_J.XPT')
-df_body <- read_xpt('./data/BMX_J.XPT')
-df_dem <-  read_xpt('./data/DEMO_J.XPT')
+df_tot_chol <- read_xpt('data/TCHOL_J.XPT')
+df_work <- read_xpt('data/OCQ_J.XPT')
+df_question_chol <- read_xpt('data/BPQ_J.XPT')
+df_phys <- read_xpt('data/PAQ_J.XPT')
+df_body <- read_xpt('data/BMX_J.XPT')
+df_dem <-  read_xpt('data/DEMO_J.XPT')
 
 # Merge and subset --------------------------------------------------
 
@@ -147,6 +147,6 @@ df_male <- df_combined %>% subset(gender == 1)
 df_female <- df_combined %>% subset(gender == 0)
 
 # Permanently save datasets
-saveRDS(df_combined, './output/data/combined.Rds')
-saveRDS(df_male, './output/data/male.Rds')
-saveRDS(df_female, './output/data/female.Rds')
+saveRDS(df_combined, 'output/data/combined.Rds')
+saveRDS(df_male, 'output/data/male.Rds')
+saveRDS(df_female, 'output/data/female.Rds')

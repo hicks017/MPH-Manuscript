@@ -1,6 +1,6 @@
 # Setup
 pacman::p_load('knitr', 'broom', 'Hmisc', 'survey', 'tidyverse')
-df_combined <- readRDS('./output/data/combined.Rds')
+df_combined <- readRDS('output/data/combined.Rds')
 attach(df_combined)
 # Weighted data
 svy1 <- svydesign(ids = SEQN,

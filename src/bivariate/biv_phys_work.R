@@ -1,6 +1,6 @@
 # Setup
 pacman::p_load('knitr', 'broom', 'survey', 'tidyverse')
-df_combined <- readRDS('./output/data/combined.Rds')
+df_combined <- readRDS('output/data/combined.Rds')
 attach(df_combined)
 chol_label <- 'total cholesterol (mg/dL)'
 phys_work_vig <- as.factor(phys_work_vig)

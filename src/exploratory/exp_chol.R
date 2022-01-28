@@ -1,8 +1,8 @@
 # Setup
 pacman::p_load('knitr', 'broom', 'Hmisc', 'survey', 'tidyverse')
-df_combined <- readRDS('./output/data/combined.Rds')
-df_male <- readRDS('./output/data/male.Rds')
-df_female <- readRDS('./output/data/female.Rds')
+df_combined <- readRDS('output/data/combined.Rds')
+df_male <- readRDS('output/data/male.Rds')
+df_female <- readRDS('output/data/female.Rds')
 # Cholesterol 200 mg/dL or higher
 df_combined$chol200 <- ifelse(df_combined$bld_tc >= 200, 1, 0)
 # Cholesterol 240 mg/dL or higher

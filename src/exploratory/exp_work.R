@@ -1,8 +1,8 @@
 # Setup
 pacman::p_load('knitr', 'broom', 'Hmisc', 'survey', 'tidyverse')
-df_combined <- readRDS('./output/data/combined.Rds')
-df_male <- readRDS('./output/data/male.Rds')
-df_female <- readRDS('./output/data/female.Rds')
+df_combined <- readRDS('output/data/combined.Rds')
+df_male <- readRDS('output/data/male.Rds')
+df_female <- readRDS('output/data/female.Rds')
 # Exactly 40 hours worked
 df_combined$wrk40 <- ifelse(df_combined$wrk_hrs == 40, 1, 0)
 # Over 40 hours

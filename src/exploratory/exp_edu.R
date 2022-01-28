@@ -1,6 +1,6 @@
 # Setup
 pacman::p_load('knitr', 'broom', 'Hmisc', 'survey', 'tidyverse')
-df_combined <- readRDS('./output/data/combined.Rds')
+df_combined <- readRDS('output/data/combined.Rds')
 # Attended/Finished college
 df_combined$college_attnd <- ifelse(
   df_combined$education >=4, 1, ifelse(is.na(df_combined$education), NA, 0))

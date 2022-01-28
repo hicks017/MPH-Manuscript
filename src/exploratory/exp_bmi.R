@@ -1,6 +1,6 @@
 # Setup
 pacman::p_load('knitr', 'broom', 'Hmisc', 'survey', 'tidyverse')
-df_combined <- readRDS('./output/data/combined.Rds')
+df_combined <- readRDS('output/data/combined.Rds')
 df_combined$bmi25 <- ifelse(df_combined$bmi >= 25, 1, 0) # BMI over 25
 attach(df_combined)
 # Weighted data

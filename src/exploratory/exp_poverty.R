@@ -1,6 +1,6 @@
 # Setup
 pacman::p_load('knitr', 'broom', 'Hmisc', 'survey', 'tidyverse')
-df_combined <- readRDS('./output/data/combined.Rds')
+df_combined <- readRDS('output/data/combined.Rds')
 df_combined$below_pov <- ifelse(df_combined$income_pov_ratio <= 1, 1, 0)
 attach(df_combined)
 # Weighted data

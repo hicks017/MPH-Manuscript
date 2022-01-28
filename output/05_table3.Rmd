@@ -11,7 +11,7 @@ output:
 ```{r setup, include=FALSE}
 pacman::p_load('MASS', 'Hmisc', 'knitr', 'broom', 'survey', 'tidyverse')
 opts_chunk$set(echo = F)
-df_combined <- readRDS('./data/combined.Rds')
+df_combined <- readRDS('data/combined.Rds')
 attach(df_combined)
 
 # Factorizing variables
