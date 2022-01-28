@@ -106,21 +106,12 @@ df_combined$gender <- ifelse(df_combined$gender == 2, 0, 1)
 # Recode race/ethnic (combining two categories into 'Hispanic')
 # Mexican American (1)
 # Other Hispanic (2)
-df_combined$race_eth <- case_when(df_combined$race_eth == 1 ~ 1,
-                                  df_combined$race_eth == 2 ~ 1,
-                                  df_combined$race_eth == 3 ~ 3,
-                                  df_combined$race_eth == 4 ~ 4,
-                                  df_combined$race_eth == 6 ~ 6,
-                                  df_combined$race_eth == 7 ~ 7)
+df_combined$race_eth[df_combined$race_eth == 2] <- 1
 
 # Recode education (combining two categories that are lower than HS degree)
 # Less than 9th grade (1)
 # Incomplete HS (2)
-df_combined$education <- case_when(df_combined$education == 1 ~ 1,
-                                   df_combined$education == 2 ~ 1,
-                                   df_combined$education == 3 ~ 3,
-                                   df_combined$education == 4 ~ 4,
-                                   df_combined$education == 5 ~ 5)
+df_combined$education[df_combined$education == 2] <- 1
 
 # Drop unused variables
 my_vars <- c(
