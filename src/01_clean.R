@@ -2,7 +2,7 @@
 pacman::p_load('haven', 'naniar', 'data.table', 'tidyverse')
 
 
-# Table of Contents -------------------------------------------------------
+# Table of Contents ------------------------------------------------------------
 
 #   1.  Import data
 #   2.  Merge and subset
@@ -11,7 +11,7 @@ pacman::p_load('haven', 'naniar', 'data.table', 'tidyverse')
 #   5.  Save
 
 
-# Import Data --------------------------------------------------
+# Import Data ------------------------------------------------------------------
 
 # Import original datasets
 # Overall n = 9254
@@ -23,7 +23,7 @@ df_phys <- read_xpt('data/PAQ_J.XPT')
 df_body <- read_xpt('data/BMX_J.XPT')
 df_dem <-  read_xpt('data/DEMO_J.XPT')
 
-# Merge and subset --------------------------------------------------
+# Merge and subset -------------------------------------------------------------
 
 # Drop lab ID's with no lab data.
 # removed = 697; n = 6738
@@ -61,7 +61,7 @@ df_combined <- df_combined %>% subset(RIDAGEYR >= 18)
 # removed = 256, n = 1,715
 df_combined <- df_combined %>% subset(BMXBMI >= 0 & INDFMPIR >= 0)
 
-# Rename, recode, and drop ------------------------------------------------
+# Rename, recode, and drop -----------------------------------------------------
 
 # Renaming variables
 # new_name = old_name
@@ -131,7 +131,7 @@ my_vars <- c(
   'weight_mec')
 df_combined <- df_combined %>% select(c(all_of(my_vars)))
 
-# Save ---------------------------------------------------------
+# Save -------------------------------------------------------------------------
 
 # Subset males and females
 df_male <- df_combined %>% subset(gender == 1)
