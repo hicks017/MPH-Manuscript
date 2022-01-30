@@ -25,11 +25,11 @@ df_dem <-  read_xpt('data/DEMO_J.XPT')
 
 # Merge and subset -------------------------------------------------------------
 
-# Drop lab ID's with no lab data.
+# Drop lab ID's with no total cholesterol lab data.
 # removed = 697; n = 6738
 df_tot_chol <- df_tot_chol[complete.cases(df_tot_chol[ , 2]),]
 
-# Join lab data with occupation data. Drops non-shared IDs.
+# Join lab data with occupation data and drop non-shared observations.
 # Shared IDs with coded NA occupation data remain and will be removed later.
 # removed = 1292; n = 5446
 df_work <- df_work %>% 
