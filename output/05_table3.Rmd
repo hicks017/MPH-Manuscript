@@ -57,4 +57,68 @@ ggplot(df_combined, aes(x = wrk_hrs, y = bld_tc)) +
   theme(legend.position = 'none')
 summary(model_fit)
 confint.lm(model_fit)
+
+# Parameter estimate plot
+pLabels = c("Working hours", "Age", "BMI", "Vigorous recreational activity",
+            "Income-to-poverty ratio", "Hispanic", "Black", "Asian",
+            "Other / multiple races")
+p_df <- data.frame(yAxis = length(pLabels):1,
+                   pEstimates = c(-0.3, 0.8, 0.5, -4.9, 1.7, 5.3, -4.5, 9.2,
+                                  10.1),
+                   pCILow = c(-0.4, 0.7, 0.2, -8.7, 0.5, 0.4, -10.4, 1.6, 1.9),
+                   pCIHigh = c(-0.1, 1.0, 0.7, -1.1, 2.8, 10.2, 1.4, 16.8,
+                               18.3))
+p <- ggplot(p_df, aes(x = pEstimates,
+                      y = reorder(pLabels, -1*pEstimates))) +
+  geom_vline(aes(xintercept = 0), size = 0.25, linetype = "dashed") +
+  geom_errorbarh(aes(xmax = pCIHigh, xmin = pCILow),
+                 size = 0.5,
+                 height = 0.2,
+                 color = "gray50") +
+  geom_point(size = 3.5, color = "black") +
+  scale_x_continuous(breaks = seq(-20, 20, 5),
+                     labels = seq(-20, 20, 5),
+                     limits = c(-20, 20)) +
+  theme_bw() +
+  theme(panel.grid.minor = element_blank()) +
+  ylab("") +
+  xlab("Parameter estimate (mg/dL)") +
+  ggtitle("Adjusted Effects on Total Blood Cholesterol")
+p
+
+```
+
+```{r graph}
+# Focusing on continuous variables: age, bmi, and working hours
+avg_base <- (model_fit$coefficients[1] + svymean(~income_pov_ratio, svy1))
+age_int <- sum(avg_base,
+                svymean(~wrk_hrs + bmi + phys_rec_vig + income_pov_ratio,
+                        svy1)[1:4] * model_fit$coefficients[c(2, 4, 9, 10)])
+bmi_int <- sum(avg_base, svymean(~wrk_hrs + age + phys_rec_vig +
+                                    income_pov_ratio, svy1)[1:4]
+                * model_fit$coefficients[c(2, 3, 9, 10)])
+wrk_int <- sum(avg_base,
+               svymean(~age + bmi + phys_rec_vig + income_pov_ratio, svy1)[1:4]
+               * model_fit$coefficients[c(3, 4, 9, 10)])
+graph_df <- data.frame(xAxis = seq(0, 80, 1))
+graph_df <- graph_df %>% mutate(ageLine = age_int + xAxis
+                                * model_fit$coefficients[3],
+                                bmiLine = bmi_int + xAxis
+                                * model_fit$coefficients[4],
+                                wrkLine = wrk_int + xAxis
+                                * model_fit$coefficients[2])
+graph_df$ageLine[0:17] <- NA
+graph_df$bmiLine[0:(round(min(bmi) -1))] <- NA
+graph_df$bmiLine[(round(max(bmi)) + 1):81] <- NA
+graph_df$wrkLine[0:min((wrk_hrs) -1)] <- NA
+ggplot(graph_df, aes(x = xAxis, y = ageLine, color = "black")) +
+  geom_line() +
+  geom_line(aes(y = bmiLine, color = "red")) +
+  geom_line(aes(y = wrkLine, color = "blue")) +
+  scale_color_manual(name = "variable",
+                     values = c("black", "red", "blue"),
+                     labels = c("age", "work hours", "bmi")) +
+  xlab("value") +
+  ylab("Total blood cholesterol (mg/dL)") +
+  ggtitle("Mean adjusted cholesterol by variables")
 ```
