@@ -5,7 +5,10 @@ A research project compiled by <a href="https://www.linkedin.com/in/christianjhi
 ### Table of contents
 **[Directory structure](#directory-structure)**<br>
 **[Introduction](#introduction)**<br>
-**[Methods](#methods)**
+**[Methods](#methods)**<br>
+**[Results](#results)**</br>
+**[Discussion](#discussion)**</br>
+**[Conclusion](#conclusion)**
 
 ## Directory structure
 
@@ -75,6 +78,18 @@ Those who worked less than full-time in the prior week, defined as less than 30 
 Descriptive and analytic statistics were calculated with R 4.1.1 “Kick Things” and utilized the weights included with the NHANES 2017-2018 dataset. No unweighted statistics are listed in Tables 1-3. TC was normally distributed amongst the weighted population; therefore, the mean and standard deviation were included in Table 1. All other continuous variables were nonnormal and the medians with minimum and maximum values were reported.
 
 Simple linear regression was used to determine the effects of the continuous variables on TC for the bivariate analysis. Pearson’s correlation was used to describe the strength of these effects. Bartlett’s test for homogeneity was used to determine the inclusion of a categorical variable in the bivariate analysis. Independent t-tests and ANOVA were performed to calculate differences in means for the included categorical variables. Multiple linear regression was used to build the adjusted model of determining the effect of prior week working hours on TC.
+
+## Results
+
+Work in progress.
+
+## Discussion
+
+Work in progress.
+
+## Conclusion
+
+Work in progress.
 
 ## Data Analysis Materials
 
