@@ -92,10 +92,10 @@ df_combined <- df_combined %>%
 # 7s: Refused to answer
 # 9s: Don't know
 df_combined <- df_combined %>% 
-  replace_with_na(list(sitting_min_daily = c(9999))) %>%  
-  replace_with_na(list(education = c(7, 9))) %>%  
-  replace_with_na(list(phys_work_vig = 9)) %>%  
-  replace_with_na(list(chol_doctor_hi = 9))
+  replace_with_na(list(sitting_min_daily = c(9999),
+                       education = c(7, 9),
+                       phys_work_vig = 9,
+                       chol_doctor_hi = 9))
 
 # Missing numbers reported in above comments
 colSums(is.na(df_combined)) %>% as.data.frame()
