@@ -6,8 +6,8 @@ A research project compiled by <a href="https://www.linkedin.com/in/christianjhi
 **[Directory structure](#directory-structure)**<br>
 **[Introduction](#introduction)**<br>
 **[Methods](#methods)**<br>
-**[Results](#results)**</br>
-**[Discussion](#discussion)**</br>
+**[Results](#results)**<br>
+**[Discussion](#discussion)**<br>
 **[Conclusion](#conclusion)**
 
 ## Directory structure
