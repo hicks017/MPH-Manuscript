@@ -103,3 +103,7 @@ data.frame(under30 = wtd.mean(df_post_hoc$chol240, df_post_hoc$weight_mec),
            full_time = wtd.mean(df_combined$chol240, df_combined$weight_mec),
            row.names = "chol240_prev")
 svyttest(chol240 ~ group, svy2) %>% tidy()
+data.frame(under30 = wtd.mean(df_post_hoc$bld_tc, df_post_hoc$weight_mec),
+           full_time = wtd.mean(df_combined$bld_tc, df_combined$weight_mec),
+           row.names = "TC")
+svyttest(bld_tc ~ group, svy2) %>% tidy()
