@@ -79,6 +79,8 @@ Descriptive and analytic statistics were calculated with R 4.1.1 “Kick Things�
 
 Simple linear regression was used to determine the effects of the continuous variables on TC for the bivariate analysis. Pearson’s correlation was used to describe the strength of these effects. Bartlett’s test for homogeneity was used to determine the inclusion of a categorical variable in the bivariate analysis. Independent t-tests and ANOVA were performed to calculate differences in means for the included categorical variables. Multiple linear regression was used to build the adjusted model of determining the effect of prior week working hours on TC.
 
+A post-hoc analysis was performed to measure a potential bias coming from a healthy worker effect. Independent t-tests were used to compare mean TC, high TC (>200 mg/dL) prevalence, and very high TC (>240 mg/dL) prevalence between the study population and those excluded from the study population.
+
 ## Results
 
 Work in progress.
