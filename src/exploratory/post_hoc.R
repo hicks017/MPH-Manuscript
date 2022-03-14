@@ -46,10 +46,10 @@ df_post_hoc <- df_post_hoc %>%
          bmi = BMXBMI,
          weight_mec = WTMEC2YR)
 df_post_hoc <- df_post_hoc %>% 
-  replace_with_na(list(sitting_min_daily = c(9999))) %>%  
-  replace_with_na(list(education = c(7, 9))) %>%  
-  replace_with_na(list(phys_work_vig = 9)) %>%  
-  replace_with_na(list(chol_doctor_hi = 9))
+  replace_with_na(list(sitting_min_daily = c(9999),
+                       education = c(7, 9),
+                       phys_work_vig = 9,
+                       chol_doctor_hi = 9))
 df_post_hoc$gender <- ifelse(df_post_hoc$gender == 2, 0, 1)
 df_post_hoc$race_eth[df_post_hoc$race_eth == 2] <- 1
 df_post_hoc$education[df_post_hoc$education == 2] <- 1
