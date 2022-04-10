@@ -3,6 +3,8 @@ pacman::p_load('knitr', 'broom', 'Hmisc', 'survey', 'tidyverse')
 df_combined <- readRDS('output/data/combined.Rds')
 df_male <- readRDS('output/data/male.Rds')
 df_female <- readRDS('output/data/female.Rds')
+# Cholesterol 177.9 mg/dL and lower
+df_combined$chol177 <- ifelse(df_combined$bld_tc <= 177.9, 1, 0)
 # Cholesterol 200 mg/dL or higher
 df_combined$chol200 <- ifelse(df_combined$bld_tc >= 200, 1, 0)
 # Cholesterol 240 mg/dL or higher
@@ -50,8 +52,8 @@ ggplot(df_combined,
 svyquantile(~bld_tc, svy1, c(0, 0.25, 0.5, 0.75, 1))
 svymean(~bld_tc, svy1)
 
-# Proportion of 200 mg/dL and over, 240 mg/dL and higher
-svymean(~chol200 + chol240, svy1)
+# Proportion of 177.9 mg/dL and under, 200 mg/dL and over, 240 mg/dL and higher
+svymean(~chol177 + chol200 + chol240, svy1)
 
 # Gender stratification, mean TC
 wtd.mean(df_male$bld_tc, weights = df_male$weight_mec)
