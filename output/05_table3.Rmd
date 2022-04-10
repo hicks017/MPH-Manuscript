@@ -56,6 +56,8 @@ ggplot(df_combined, aes(x = wrk_hrs, y = bld_tc)) +
   geom_line(data = new_df, aes(col = 'red')) +
   theme(legend.position = 'none')
 summary(model_fit)
+print(paste0("Root mean square: ",
+             resid(model_fit)**2 %>% mean() %>% sqrt() %>% round(digits = 2)))
 confint.lm(model_fit)
 
 # Parameter estimate plot
