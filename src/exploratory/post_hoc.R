@@ -94,15 +94,16 @@ svy2 <- svydesign(ids = ~SEQN,
                   weights = ~weight_mec,
                   data = df_both)
 
-# Comparing with t tests
+# Comapring with chi-square tests
 data.frame(under30 = wtd.mean(df_post_hoc$chol200, df_post_hoc$weight_mec),
            full_time = wtd.mean(df_combined$chol200, df_combined$weight_mec),
            row.names = "chol200_prev")
-svyttest(chol200 ~ group, svy2) %>% tidy()
+svychisq(~chol200+group, svy2)
 data.frame(under30 = wtd.mean(df_post_hoc$chol240, df_post_hoc$weight_mec),
            full_time = wtd.mean(df_combined$chol240, df_combined$weight_mec),
            row.names = "chol240_prev")
-svyttest(chol240 ~ group, svy2) %>% tidy()
+svychisq(~chol240+group, svy2)
+# Comparing with t tests
 data.frame(under30 = wtd.mean(df_post_hoc$bld_tc, df_post_hoc$weight_mec),
            full_time = wtd.mean(df_combined$bld_tc, df_combined$weight_mec),
            row.names = "TC")
